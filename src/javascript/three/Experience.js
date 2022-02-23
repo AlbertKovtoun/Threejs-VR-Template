@@ -58,9 +58,14 @@ setInterval(() => {
   hand1.position.copy(renderer.renderer.xr.getController(0).position)
   hand2.position.copy(renderer.renderer.xr.getController(1).position)
 
+  hand1.rotation.copy(renderer.renderer.xr.getController(0).rotation)
+  hand2.rotation.copy(renderer.renderer.xr.getController(1).rotation)
+
   // hand.position.set(renderer.renderer.xr.getController(0).position)
   // console.log(renderer.renderer.xr.getController(0).position)
 }, 1000 / 60)
+
+console.log(renderer.renderer.xr.getController(0).rotation);
 
 //Animate
 const clock = new THREE.Clock()
