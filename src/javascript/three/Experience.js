@@ -1,5 +1,6 @@
 import * as THREE from "three"
 import { VRButton } from "three/examples/jsm/webxr/VRButton"
+import { WebXRController } from "three"
 import Stats from "stats.js"
 
 import { Camera } from "./Camera"
@@ -40,6 +41,27 @@ export const renderer = new Renderer()
 document.body.appendChild(VRButton.createButton(renderer.renderer))
 renderer.renderer.xr.enabled = true
 
+const hand1 = new THREE.Mesh(
+  new THREE.BoxGeometry(0.15, 0.15, 0.15),
+  new THREE.MeshBasicMaterial({ color: "red" })
+)
+scene.add(hand1)
+const hand2 = new THREE.Mesh(
+  new THREE.BoxGeometry(0.15, 0.15, 0.15),
+  new THREE.MeshBasicMaterial({ color: "red" })
+)
+scene.add(hand2)
+
+setInterval(() => {
+  // console.log(renderer.renderer.xr.getHand(0))
+
+  hand1.position.copy(renderer.renderer.xr.getController(0).position)
+  hand2.position.copy(renderer.renderer.xr.getController(1).position)
+
+  // hand.position.set(renderer.renderer.xr.getController(0).position)
+  // console.log(renderer.renderer.xr.getController(0).position)
+}, 1000 / 60)
+
 //Animate
 const clock = new THREE.Clock()
 
@@ -64,8 +86,7 @@ const clock = new THREE.Clock()
 // tick()
 
 renderer.renderer.setAnimationLoop(() => {
-
-  cube.rotation.y += 0.005
+  // cube.rotation.y += 0.005
 
   camera.controls.update()
 
