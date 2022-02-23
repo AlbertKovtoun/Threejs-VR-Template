@@ -26,8 +26,8 @@ export const camera = new Camera()
 
 export const renderer = new Renderer()
 
-document.body.appendChild(VRButton.createButton(renderer.renderer))
 renderer.renderer.xr.enabled = true
+document.body.appendChild(VRButton.createButton(renderer.renderer))
 
 //Animate
 const clock = new THREE.Clock()
