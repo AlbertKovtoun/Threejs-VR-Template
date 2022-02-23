@@ -32,22 +32,26 @@ document.body.appendChild(VRButton.createButton(renderer.renderer))
 //Animate
 const clock = new THREE.Clock()
 
-const tick = () => {
-  stats.begin()
+// const tick = () => {
+//   stats.begin()
 
-  const elapsedTime = clock.getElapsedTime()
+//   const elapsedTime = clock.getElapsedTime()
 
-  // Update controls
-  camera.controls.update()
+//   // Update controls
+//   camera.controls.update()
 
-  // Render
-  renderer.renderer.render(scene, camera.camera)
+//   // Render
+//   renderer.renderer.render(scene, camera.camera)
 
-  setTimeout(() => {
-    window.requestAnimationFrame(tick)
-  }, 1000 / 60)
+//   setTimeout(() => {
+//     window.requestAnimationFrame(tick)
+//   }, 1000 / 60)
 
-  stats.end()
-}
+//   stats.end()
+// }
 
-tick()
+// tick()
+
+renderer.renderer.setAnimationLoop(() => {
+  renderer.renderer.render(scene, camera)
+})
