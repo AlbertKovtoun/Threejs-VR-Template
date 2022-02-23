@@ -22,7 +22,6 @@ const floor = new THREE.Mesh(
   new THREE.MeshBasicMaterial({ color: "blue" })
 )
 floor.rotation.x = -Math.PI / 2
-floor.position.y = 1
 scene.add(floor)
 
 const cube = new THREE.Mesh(
