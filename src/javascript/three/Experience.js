@@ -64,6 +64,9 @@ const clock = new THREE.Clock()
 // tick()
 
 renderer.renderer.setAnimationLoop(() => {
+
+  cube.rotation.y += 0.005
+
   camera.controls.update()
 
   renderer.renderer.render(scene, camera.camera)
