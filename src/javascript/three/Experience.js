@@ -18,6 +18,7 @@ const cube = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.3, 20, 40),
   new THREE.MeshBasicMaterial({ color: "black", wireframe: true })
 )
+cube.position.set(0, 1.6, 2)
 scene.add(cube)
 
 export const sizes = new Sizes()
