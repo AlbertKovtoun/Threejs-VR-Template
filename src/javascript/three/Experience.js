@@ -53,5 +53,5 @@ const clock = new THREE.Clock()
 // tick()
 
 renderer.renderer.setAnimationLoop(() => {
-  renderer.renderer.render(scene, camera)
+  renderer.renderer.render(scene, camera.camera)
 })
