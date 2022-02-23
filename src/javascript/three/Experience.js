@@ -14,11 +14,21 @@ export const canvas = document.querySelector("canvas.webgl")
 
 export const scene = new THREE.Scene()
 
+const gridHelper = new THREE.GridHelper(10, 10)
+scene.add(gridHelper)
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(20, 20, 2, 2),
+  new THREE.MeshBasicMaterial({ color: "blue", wireframe: true })
+)
+cube.rotation.set(-Math.PI, 0, 0)
+scene.add(cube)
+
 const cube = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.3, 20, 40),
   new THREE.MeshBasicMaterial({ color: "black", wireframe: true })
 )
-cube.position.set(0, 1.6, 2)
+cube.position.set(0, 1.6, 10)
 scene.add(cube)
 
 export const sizes = new Sizes()
