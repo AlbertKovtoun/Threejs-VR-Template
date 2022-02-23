@@ -16,7 +16,7 @@ export const scene = new THREE.Scene()
 
 const cube = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.3, 20, 40),
-  new THREE.MeshBasicMaterial({ color: "white", wireframe: true })
+  new THREE.MeshBasicMaterial({ color: "black", wireframe: true })
 )
 scene.add(cube)
 
