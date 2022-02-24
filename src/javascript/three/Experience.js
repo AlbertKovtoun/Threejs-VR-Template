@@ -1,13 +1,14 @@
 import * as THREE from "three"
 import { VRButton } from "three/examples/jsm/webxr/VRButton"
-import { WebXRController } from "three"
+// import { WebXRController } from "three"
 import Stats from "stats.js"
 
 import { Camera } from "./Camera"
 import { Renderer } from "./Renderer"
 import { Sizes } from "./Sizes"
 import { Player } from "./Player"
-new THREE.MeshBasicMaterial({ color: "black" })
+import { Loaders } from "./Loaders"
+
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom)
@@ -16,8 +17,7 @@ export const canvas = document.querySelector("canvas.webgl")
 
 export const scene = new THREE.Scene()
 
-// const gridHelper = new THREE.GridHelper(10, 10)
-// scene.add(gridHelper)
+export const loaders = new Loaders()
 
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(20, 20, 2, 2),
@@ -44,18 +44,22 @@ export const player = new Player()
 document.body.appendChild(VRButton.createButton(renderer.renderer))
 renderer.renderer.xr.enabled = true
 
-
-setInterval(() => {
-  // console.log(renderer.renderer.xr.getHand(0))
-
-
-
-  // hand.position.set(renderer.renderer.xr.getController(0).position)
-  // console.log(renderer.renderer.xr.getController(0).position)
-}, 1000 / 60)
-
 //Animate
 const clock = new THREE.Clock()
+
+renderer.renderer.setAnimationLoop(() => {
+  stats.begin()
+
+  const elapsedTime = clock.getElapsedTime()
+
+  if(player.hands) player.updatePlayerHands()
+
+  camera.controls.update()
+
+  renderer.renderer.render(scene, camera.camera)
+
+  stats.end()
+})
 
 // const tick = () => {
 //   stats.begin()
@@ -76,17 +80,3 @@ const clock = new THREE.Clock()
 // }
 
 // tick()
-
-renderer.renderer.setAnimationLoop(() => {
-  stats.begin()
-
-  const elapsedTime = clock.getElapsedTime()
-
-  player.updatePlayerHands()
-
-  camera.controls.update()
-
-  renderer.renderer.render(scene, camera.camera)
-
-  stats.end()
-})
