@@ -6,7 +6,8 @@ import Stats from "stats.js"
 import { Camera } from "./Camera"
 import { Renderer } from "./Renderer"
 import { Sizes } from "./Sizes"
-
+import { Player } from "./Player"
+new THREE.MeshBasicMaterial({ color: "black" })
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom)
@@ -27,7 +28,7 @@ scene.add(floor)
 
 const cube = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.3, 20, 40),
-  new THREE.MeshBasicMaterial({ color: "black", wireframe: true })
+  new THREE.MeshBasicMaterial({ color: "black" })
 )
 cube.position.set(0, 1.6, -10)
 scene.add(cube)
@@ -38,34 +39,20 @@ export const camera = new Camera()
 
 export const renderer = new Renderer()
 
+export const player = new Player()
+
 document.body.appendChild(VRButton.createButton(renderer.renderer))
 renderer.renderer.xr.enabled = true
 
-const hand1 = new THREE.Mesh(
-  new THREE.BoxGeometry(0.15, 0.15, 0.15),
-  new THREE.MeshBasicMaterial({ color: "red" })
-)
-scene.add(hand1)
-const hand2 = new THREE.Mesh(
-  new THREE.BoxGeometry(0.15, 0.15, 0.15),
-  new THREE.MeshBasicMaterial({ color: "red" })
-)
-scene.add(hand2)
 
 setInterval(() => {
   // console.log(renderer.renderer.xr.getHand(0))
 
-  hand1.position.copy(renderer.renderer.xr.getController(0).position)
-  hand2.position.copy(renderer.renderer.xr.getController(1).position)
 
-  hand1.rotation.copy(renderer.renderer.xr.getController(0).rotation)
-  hand2.rotation.copy(renderer.renderer.xr.getController(1).rotation)
 
   // hand.position.set(renderer.renderer.xr.getController(0).position)
   // console.log(renderer.renderer.xr.getController(0).position)
 }, 1000 / 60)
-
-console.log(renderer.renderer.xr.getController(0).rotation);
 
 //Animate
 const clock = new THREE.Clock()
@@ -91,9 +78,15 @@ const clock = new THREE.Clock()
 // tick()
 
 renderer.renderer.setAnimationLoop(() => {
-  // cube.rotation.y += 0.005
+  stats.begin()
+
+  const elapsedTime = clock.getElapsedTime()
+
+  player.updatePlayerHands()
 
   camera.controls.update()
 
   renderer.renderer.render(scene, camera.camera)
+
+  stats.end()
 })
