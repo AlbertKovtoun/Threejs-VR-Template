@@ -46,10 +46,10 @@ export class Player {
     // this.hand1.rotation.copy(renderer.renderer.xr.getController(0).rotation)
     // this.hand2.rotation.copy(renderer.renderer.xr.getController(1).rotation)
 
-    this.rightHand.position.copy(renderer.renderer.xr.getController(0).position)
-    this.leftHand.position.copy(renderer.renderer.xr.getController(1).position)
+    this.leftHand.position.copy(renderer.renderer.xr.getController(0).position)
+    this.rightHand.position.copy(renderer.renderer.xr.getController(1).position)
 
-    this.rightHand.rotation.copy(renderer.renderer.xr.getController(0).rotation)
-    this.leftHand.rotation.copy(renderer.renderer.xr.getController(1).rotation)
+    this.leftHand.rotation.copy(renderer.renderer.xr.getController(0).rotation)
+    this.rightHand.rotation.copy(renderer.renderer.xr.getController(1).rotation)
   }
 }
