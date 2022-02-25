@@ -1,5 +1,4 @@
 import * as THREE from "three"
-import { VRButton } from "three/examples/jsm/webxr/VRButton"
 // import { WebXRController } from "three"
 import Stats from "stats.js"
 
@@ -47,9 +46,6 @@ export const camera = new Camera()
 export const renderer = new Renderer()
 
 export const player = new Player()
-
-document.body.appendChild(VRButton.createButton(renderer.renderer))
-renderer.renderer.xr.enabled = true
 
 //Animate
 const clock = new THREE.Clock()

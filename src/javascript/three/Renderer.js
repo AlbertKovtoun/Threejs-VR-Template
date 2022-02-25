@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { VRButton } from "three/examples/jsm/webxr/VRButton"
 import { canvas, sizes } from "./Experience"
 
 export class Renderer {
@@ -16,5 +17,8 @@ export class Renderer {
     this.renderer.setSize(sizes.width, sizes.height)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     this.renderer.setClearColor(0xffffff)
+
+    document.body.appendChild(VRButton.createButton(this.renderer))
+    this.renderer.xr.enabled = true
   }
 }

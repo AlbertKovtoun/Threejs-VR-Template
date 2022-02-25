@@ -19,25 +19,15 @@ export class Player {
   }
 
   setPlayerHands() {
-    // this.hand1 = new THREE.Mesh(
-    //   new THREE.BoxGeometry(0.15, 0.15, 0.15),
-    //   new THREE.MeshBasicMaterial({ color: "red" })
-    // )
-    // scene.add(this.hand1)
-    // this.hand2 = new THREE.Mesh(
-    //   new THREE.BoxGeometry(0.15, 0.15, 0.15),
-    //   new THREE.MeshBasicMaterial({ color: "red" })
-    // )
-    // scene.add(this.hand2)
+    //Hand model
+    // loaders.gltfLoader.load(handsModelPath, (gltf) => {
+    //   this.hands = gltf.scene
 
-    loaders.gltfLoader.load(handsModelPath, (gltf) => {
-      this.hands = gltf.scene
+    //   this.leftHand = this.hands.getObjectByName("LeftHand")
+    //   this.rightHand = this.hands.getObjectByName("RightHand")
 
-      this.leftHand = this.hands.getObjectByName("LeftHand")
-      this.rightHand = this.hands.getObjectByName("RightHand")
-
-      scene.add(this.hands)
-    })
+    //   scene.add(this.hands)
+    // })
 
     this.controller1 = renderer.renderer.xr.getController(0)
     this.controller2 = renderer.renderer.xr.getController(1)
@@ -46,23 +36,39 @@ export class Player {
     this.controllerModelFactory = new XRControllerModelFactory()
 
     this.controllerGrip1 = renderer.renderer.xr.getControllerGrip(0)
-    this.controllerGrip1.add(this.controllerModelFactory.createControllerModel(this.controllerGrip1))
+    this.controllerGrip1.add(
+      this.controllerModelFactory.createControllerModel(this.controllerGrip1)
+    )
     scene.add(this.controllerGrip1)
 
     this.controllerGrip2 = renderer.renderer.xr.getControllerGrip(1)
-    this.controllerGrip2.add(this.controllerModelFactory.createControllerModel(this.controllerGrip2))
+    this.controllerGrip2.add(
+      this.controllerModelFactory.createControllerModel(this.controllerGrip2)
+    )
     scene.add(this.controllerGrip2)
+
+    //Add visual line
+    const laserHelper = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, 0, -1),
+    ])
+
+    this.lazer = new THREE.Line(laserHelper)
+    //!Important
+    this.lazer.name = "lazer"
+    this.lazer.scale.z = 5
+
+    this.controller1.add(this.lazer.clone())
+    this.controller2.add(this.lazer.clone())
   }
 
   updatePlayerHands() {
-
     // this.leftHand.position.copy(
     //   renderer.renderer.xr.getControllerGrip(0).position
     // )
     // this.rightHand.position.copy(
     //   renderer.renderer.xr.getControllerGrip(1).position
     // )
-
     // this.leftHand.rotation.copy(
     //   renderer.renderer.xr.getControllerGrip(0).rotation
     // )
