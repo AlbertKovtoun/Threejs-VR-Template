@@ -6,6 +6,7 @@ const handsModelPath = "/assets/Hands.gltf"
 
 export class Player {
   constructor() {
+    this.currentIntersect = null
     this.setPlayer()
     this.setPlayerHands()
   }
@@ -33,7 +34,12 @@ export class Player {
     this.controller2 = renderer.renderer.xr.getController(1)
     // this.controller1.addEventListener("selectstart", this.onSelectStart)
     this.controller1.addEventListener("selectstart", () => {
-      console.log(this.getIntersections(this.controller1))
+      if (this.currentIntersect) {
+        if (this.currentIntersect.object.name === "OBJECT") {
+          console.log("Clicked on OBJECT")
+          this.object.material.color = new THREE.Color(0xff0000)
+        }
+      }
     })
 
     // this.controller1.addEventListener("selectend", this.onSelectEnd)
@@ -83,11 +89,28 @@ export class Player {
     this.group.add(this.object)
   }
 
-  getIntersections(controller) {
-    this.tempMatrix.identity().extractRotation(controller.matrixWorld)
-    this.raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld)
+  getIntersections() {
+    this.tempMatrix.identity().extractRotation(this.controller1.matrixWorld)
+    this.raycaster.ray.origin.setFromMatrixPosition(
+      this.controller1.matrixWorld
+    )
     this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.tempMatrix)
-    return this.raycaster.intersectObjects(this.group.children, false)
+    const intersects = this.raycaster.intersectObjects(
+      this.group.children,
+      false
+    )
+
+    if (intersects.length) {
+      if (!this.currentIntersect) {
+        console.log("Mouse enter")
+      }
+      this.currentIntersect = intersects[0]
+    } else {
+      if (this.currentIntersect) {
+        console.log("Mouse leave")
+      }
+      this.currentIntersect = null
+    }
   }
 
   onSelectStart(event) {
@@ -95,7 +118,10 @@ export class Player {
 
     // const intersections = this.getIntersections(controller)
 
-    const intersections = this.raycaster.intersectObjects(this.group.children, false)
+    const intersections = this.raycaster.intersectObjects(
+      this.group.children,
+      false
+    )
 
     if (intersections.length > 0) {
       const intersection = intersections[0]

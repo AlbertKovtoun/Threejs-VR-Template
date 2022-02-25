@@ -50,6 +50,10 @@ export const player = new Player()
 //Animate
 const clock = new THREE.Clock()
 
+setInterval(() => {
+  player.getIntersections()
+}, 500)
+
 renderer.renderer.setAnimationLoop(() => {
   stats.begin()
 
