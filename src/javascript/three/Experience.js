@@ -17,11 +17,18 @@ export const canvas = document.querySelector("canvas.webgl")
 
 export const scene = new THREE.Scene()
 
+const al = new THREE.AmbientLight(0xffffff, 0.8)
+// scene.add(al)
+
+const pl = new THREE.PointLight(0xffffff, 3)
+pl.position.set(0, 1, 0)
+scene.add(pl)
+
 export const loaders = new Loaders()
 
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(20, 20, 2, 2),
-  new THREE.MeshBasicMaterial({ color: "blue" })
+  new THREE.MeshStandardMaterial({ color: "blue" })
 )
 floor.rotation.x = -Math.PI / 2
 scene.add(floor)
@@ -52,7 +59,7 @@ renderer.renderer.setAnimationLoop(() => {
 
   const elapsedTime = clock.getElapsedTime()
 
-  if(player.hands) player.updatePlayerHands()
+  if (player.hands) player.updatePlayerHands()
 
   camera.controls.update()
 

@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory"
 import { camera, loaders, renderer, scene } from "./Experience"
 
 const handsModelPath = "/assets/Hands.gltf"
@@ -18,16 +19,16 @@ export class Player {
   }
 
   setPlayerHands() {
-    this.hand1 = new THREE.Mesh(
-      new THREE.BoxGeometry(0.15, 0.15, 0.15),
-      new THREE.MeshBasicMaterial({ color: "red" })
-    )
-    scene.add(this.hand1)
-    this.hand2 = new THREE.Mesh(
-      new THREE.BoxGeometry(0.15, 0.15, 0.15),
-      new THREE.MeshBasicMaterial({ color: "red" })
-    )
-    scene.add(this.hand2)
+    // this.hand1 = new THREE.Mesh(
+    //   new THREE.BoxGeometry(0.15, 0.15, 0.15),
+    //   new THREE.MeshBasicMaterial({ color: "red" })
+    // )
+    // scene.add(this.hand1)
+    // this.hand2 = new THREE.Mesh(
+    //   new THREE.BoxGeometry(0.15, 0.15, 0.15),
+    //   new THREE.MeshBasicMaterial({ color: "red" })
+    // )
+    // scene.add(this.hand2)
 
     loaders.gltfLoader.load(handsModelPath, (gltf) => {
       this.hands = gltf.scene
@@ -37,19 +38,36 @@ export class Player {
 
       scene.add(this.hands)
     })
+
+    this.controller1 = renderer.renderer.xr.getController(0)
+    this.controller2 = renderer.renderer.xr.getController(1)
+    scene.add(this.controller1, this.controller2)
+
+    this.controllerModelFactory = new XRControllerModelFactory()
+
+    this.controllerGrip1 = renderer.renderer.xr.getControllerGrip(0)
+    this.controllerGrip1.add(this.controllerModelFactory.createControllerModel(this.controllerGrip1))
+    scene.add(this.controllerGrip1)
+
+    this.controllerGrip2 = renderer.renderer.xr.getControllerGrip(1)
+    this.controllerGrip2.add(this.controllerModelFactory.createControllerModel(this.controllerGrip2))
+    scene.add(this.controllerGrip2)
   }
 
   updatePlayerHands() {
-    // this.hand1.position.copy(renderer.renderer.xr.getController(0).position)
-    // this.hand2.position.copy(renderer.renderer.xr.getController(1).position)
 
-    // this.hand1.rotation.copy(renderer.renderer.xr.getController(0).rotation)
-    // this.hand2.rotation.copy(renderer.renderer.xr.getController(1).rotation)
+    // this.leftHand.position.copy(
+    //   renderer.renderer.xr.getControllerGrip(0).position
+    // )
+    // this.rightHand.position.copy(
+    //   renderer.renderer.xr.getControllerGrip(1).position
+    // )
 
-    this.leftHand.position.copy(renderer.renderer.xr.getController(0).position)
-    this.rightHand.position.copy(renderer.renderer.xr.getController(1).position)
-
-    this.leftHand.rotation.copy(renderer.renderer.xr.getController(0).rotation)
-    this.rightHand.rotation.copy(renderer.renderer.xr.getController(1).rotation)
+    // this.leftHand.rotation.copy(
+    //   renderer.renderer.xr.getControllerGrip(0).rotation
+    // )
+    // this.rightHand.rotation.copy(
+    //   renderer.renderer.xr.getControllerGrip(1).rotation
+    // )
   }
 }
