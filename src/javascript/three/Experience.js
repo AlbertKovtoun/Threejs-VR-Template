@@ -17,10 +17,10 @@ export const canvas = document.querySelector("canvas.webgl")
 
 export const scene = new THREE.Scene()
 
-const al = new THREE.AmbientLight(0xffffff, 0.8)
-// scene.add(al)
+const al = new THREE.AmbientLight(0xffffff, 0.5)
+scene.add(al)
 
-const pl = new THREE.PointLight(0xffffff, 3)
+const pl = new THREE.PointLight(0xffffff, 10)
 pl.position.set(0, 1, 0)
 scene.add(pl)
 
