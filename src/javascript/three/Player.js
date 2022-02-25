@@ -37,7 +37,7 @@ export class Player {
       if (this.currentIntersect) {
         if (this.currentIntersect.object.name === "OBJECT") {
           console.log("Clicked on OBJECT")
-          this.object.material.color = new THREE.Color(0xff0000)
+          this.object.material.color = new THREE.Color(Math.random(), Math.random(), Math.random())
         }
       }
     })
