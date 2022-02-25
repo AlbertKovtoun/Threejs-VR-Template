@@ -31,6 +31,12 @@ export class Player {
 
     this.controller1 = renderer.renderer.xr.getController(0)
     this.controller2 = renderer.renderer.xr.getController(1)
+    // this.controller1.addEventListener("selectstart", this.onSelectStart)
+    this.controller1.addEventListener("selectstart", () => {
+      console.log(this.getIntersections(this.controller1))
+    })
+
+    // this.controller1.addEventListener("selectend", this.onSelectEnd)
     scene.add(this.controller1, this.controller2)
 
     this.controllerModelFactory = new XRControllerModelFactory()
@@ -60,6 +66,44 @@ export class Player {
 
     this.controller1.add(this.lazer.clone())
     this.controller2.add(this.lazer.clone())
+
+    this.tempMatrix = new THREE.Matrix4()
+
+    this.raycaster = new THREE.Raycaster()
+
+    this.group = new THREE.Group()
+    scene.add(this.group)
+
+    this.object = new THREE.Mesh(
+      new THREE.BoxGeometry(1),
+      new THREE.MeshBasicMaterial({ color: "" })
+    )
+    this.object.name = "OBJECT"
+    this.object.position.set(0, 0.5, -5)
+    this.group.add(this.object)
+  }
+
+  getIntersections(controller) {
+    this.tempMatrix.identity().extractRotation(controller.matrixWorld)
+    this.raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld)
+    this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.tempMatrix)
+    return this.raycaster.intersectObjects(this.group.children, false)
+  }
+
+  onSelectStart(event) {
+    const controller = event.target
+
+    // const intersections = this.getIntersections(controller)
+
+    const intersections = this.raycaster.intersectObjects(this.group.children, false)
+
+    if (intersections.length > 0) {
+      const intersection = intersections[0]
+
+      const object = intersection.object
+      object.material.color = new THREE.Color(0xff0000)
+      //
+    }
   }
 
   updatePlayerHands() {
