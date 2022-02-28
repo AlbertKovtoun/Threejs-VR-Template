@@ -8,8 +8,8 @@ import { Sizes } from "./Sizes"
 import { Player } from "./Player"
 import { Loaders } from "./Loaders"
 import { Raycaster } from "./Raycaster"
-import {Shader} from "./Shader"
-import {Mirror} from "./Mirror"
+import { Shader } from "./Shader"
+import { Mirror } from "./Mirror"
 
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -70,7 +70,7 @@ renderer.renderer.setAnimationLoop(() => {
 
   if (player.hands) player.updatePlayerHands()
 
-  camera.controls.update()
+  // camera.controls.update()
 
   renderer.renderer.render(scene, camera.camera)
 
@@ -83,7 +83,7 @@ renderer.renderer.setAnimationLoop(() => {
 //   const elapsedTime = clock.getElapsedTime()
 
 //   // Update controls
-//   camera.controls.update()
+//   // camera.controls.update()
 
 //   // Render
 //   renderer.renderer.render(scene, camera.camera)
