@@ -13,7 +13,7 @@ export class Shader {
 
   setShader() {
     this.shader = new THREE.Mesh(
-      new THREE.PlaneGeometry(50, 50, 2, 2),
+      new THREE.SphereGeometry(25, 50, 50),
       new THREE.ShaderMaterial({
         side: THREE.BackSide,
         vertexShader: vertexShaderPath,

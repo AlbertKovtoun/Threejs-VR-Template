@@ -36,7 +36,7 @@ scene.add(floor)
 
 const cube = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.3, 20, 40),
-  new THREE.MeshBasicMaterial({ color: "black" })
+  new THREE.MeshBasicMaterial({ color: "red" })
 )
 cube.position.set(0, 1.6, -10)
 scene.add(cube)
