@@ -1,14 +1,15 @@
 import * as THREE from "three"
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory"
-import { camera, loaders, renderer, scene } from "./Experience"
+import { camera, loaders, raycaster, renderer, scene } from "./Experience"
 
-const handsModelPath = "/assets/Hands.gltf"
+// const handsModelPath = "/assets/Hands.gltf"
 
 export class Player {
   constructor() {
     this.currentIntersect = null
     this.setPlayer()
     this.setPlayerHands()
+    // raycaster.getIntersections(this.controller1)
   }
 
   setPlayer() {
@@ -32,11 +33,14 @@ export class Player {
 
     this.controller1 = renderer.renderer.xr.getController(0)
     this.controller2 = renderer.renderer.xr.getController(1)
+
+    //EventListener for when user is pressing main button
     this.controller1.addEventListener("selectstart", () => {
-      if (this.currentIntersect) {
-        if (this.currentIntersect.object.name === "OBJECT") {
+      if (raycaster.currentIntersect) {
+        //If statement to check which object is being clicked on
+        if (raycaster.currentIntersect.object.name === "OBJECT") {
           console.log("Clicked on OBJECT")
-          this.object.material.color = new THREE.Color(
+          raycaster.object.material.color = new THREE.Color(
             Math.random(),
             Math.random(),
             Math.random()
@@ -44,8 +48,6 @@ export class Player {
         }
       }
     })
-
-    // this.controller1.addEventListener("selectend", this.onSelectEnd)
     scene.add(this.controller1, this.controller2)
 
     this.controllerModelFactory = new XRControllerModelFactory()
@@ -73,65 +75,7 @@ export class Player {
 
     this.controller1.add(this.lazer.clone())
     this.controller2.add(this.lazer.clone())
-
-    this.tempMatrix = new THREE.Matrix4()
-
-    this.raycaster = new THREE.Raycaster()
-
-    this.group = new THREE.Group()
-    scene.add(this.group)
-
-    this.object = new THREE.Mesh(
-      new THREE.BoxGeometry(1),
-      new THREE.MeshBasicMaterial({ color: "" })
-    )
-    this.object.name = "OBJECT"
-    this.object.position.set(0, 0.5, -5)
-    this.group.add(this.object)
   }
-
-  getIntersections() {
-    this.tempMatrix.identity().extractRotation(this.controller1.matrixWorld)
-    this.raycaster.ray.origin.setFromMatrixPosition(
-      this.controller1.matrixWorld
-    )
-    this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.tempMatrix)
-    const intersects = this.raycaster.intersectObjects(
-      this.group.children,
-      false
-    )
-
-    if (intersects.length) {
-      if (!this.currentIntersect) {
-        console.log("Entered object")
-      }
-      this.currentIntersect = intersects[0]
-    } else {
-      if (this.currentIntersect) {
-        console.log("Left object")
-      }
-      this.currentIntersect = null
-    }
-  }
-
-  //onSelectStart(event) {
-  //  const controller = event.target
-
-  //  // const intersections = this.getIntersections(controller)
-
-  //  const intersections = this.raycaster.intersectObjects(
-  //    this.group.children,
-  //    false
-  //  )
-
-  //  if (intersections.length > 0) {
-  //    const intersection = intersections[0]
-
-  //    const object = intersection.object
-  //    object.material.color = new THREE.Color(0xff0000)
-  //    //
-  //  }
-  //}
 
   updatePlayerHands() {
     // this.leftHand.position.copy(

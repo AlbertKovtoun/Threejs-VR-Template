@@ -7,7 +7,8 @@ import { Renderer } from "./Renderer"
 import { Sizes } from "./Sizes"
 import { Player } from "./Player"
 import { Loaders } from "./Loaders"
-import {Raycaster} from "./Raycaster"
+import { Raycaster } from "./Raycaster"
+import {Shader} from "./Shader"
 
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -40,6 +41,8 @@ const cube = new THREE.Mesh(
 cube.position.set(0, 1.6, -10)
 scene.add(cube)
 
+export const shader = new Shader()
+
 export const sizes = new Sizes()
 
 export const camera = new Camera()
@@ -53,14 +56,12 @@ export const player = new Player()
 //Animate
 const clock = new THREE.Clock()
 
-setInterval(() => {
-  player.getIntersections()
-}, 500)
-
 renderer.renderer.setAnimationLoop(() => {
   stats.begin()
 
   const elapsedTime = clock.getElapsedTime()
+
+  raycaster.getIntersections(player.controller1)
 
   if (player.hands) player.updatePlayerHands()
 
