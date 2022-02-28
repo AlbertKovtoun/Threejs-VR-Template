@@ -9,6 +9,7 @@ import { Player } from "./Player"
 import { Loaders } from "./Loaders"
 import { Raycaster } from "./Raycaster"
 import {Shader} from "./Shader"
+import {Mirror} from "./Mirror"
 
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -50,6 +51,8 @@ export const camera = new Camera()
 export const renderer = new Renderer()
 
 export const raycaster = new Raycaster()
+
+export const mirror = new Mirror()
 
 export const player = new Player()
 
