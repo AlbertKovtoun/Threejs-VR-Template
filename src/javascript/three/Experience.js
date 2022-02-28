@@ -7,6 +7,7 @@ import { Renderer } from "./Renderer"
 import { Sizes } from "./Sizes"
 import { Player } from "./Player"
 import { Loaders } from "./Loaders"
+import {Raycaster} from "./Raycaster"
 
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -44,6 +45,8 @@ export const sizes = new Sizes()
 export const camera = new Camera()
 
 export const renderer = new Renderer()
+
+export const raycaster = new Raycaster()
 
 export const player = new Player()
 

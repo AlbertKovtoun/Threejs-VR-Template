@@ -32,12 +32,15 @@ export class Player {
 
     this.controller1 = renderer.renderer.xr.getController(0)
     this.controller2 = renderer.renderer.xr.getController(1)
-    // this.controller1.addEventListener("selectstart", this.onSelectStart)
     this.controller1.addEventListener("selectstart", () => {
       if (this.currentIntersect) {
         if (this.currentIntersect.object.name === "OBJECT") {
           console.log("Clicked on OBJECT")
-          this.object.material.color = new THREE.Color(Math.random(), Math.random(), Math.random())
+          this.object.material.color = new THREE.Color(
+            Math.random(),
+            Math.random(),
+            Math.random()
+          )
         }
       }
     })
@@ -66,8 +69,6 @@ export class Player {
     ])
 
     this.lazer = new THREE.Line(laserHelper)
-    //!Important
-    this.lazer.name = "lazer"
     this.lazer.scale.z = 5
 
     this.controller1.add(this.lazer.clone())
@@ -102,35 +103,35 @@ export class Player {
 
     if (intersects.length) {
       if (!this.currentIntersect) {
-        console.log("Mouse enter")
+        console.log("Entered object")
       }
       this.currentIntersect = intersects[0]
     } else {
       if (this.currentIntersect) {
-        console.log("Mouse leave")
+        console.log("Left object")
       }
       this.currentIntersect = null
     }
   }
 
-  onSelectStart(event) {
-    const controller = event.target
+  //onSelectStart(event) {
+  //  const controller = event.target
 
-    // const intersections = this.getIntersections(controller)
+  //  // const intersections = this.getIntersections(controller)
 
-    const intersections = this.raycaster.intersectObjects(
-      this.group.children,
-      false
-    )
+  //  const intersections = this.raycaster.intersectObjects(
+  //    this.group.children,
+  //    false
+  //  )
 
-    if (intersections.length > 0) {
-      const intersection = intersections[0]
+  //  if (intersections.length > 0) {
+  //    const intersection = intersections[0]
 
-      const object = intersection.object
-      object.material.color = new THREE.Color(0xff0000)
-      //
-    }
-  }
+  //    const object = intersection.object
+  //    object.material.color = new THREE.Color(0xff0000)
+  //    //
+  //  }
+  //}
 
   updatePlayerHands() {
     // this.leftHand.position.copy(
