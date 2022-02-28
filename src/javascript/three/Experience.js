@@ -61,6 +61,8 @@ renderer.renderer.setAnimationLoop(() => {
 
   const elapsedTime = clock.getElapsedTime()
 
+  shader.shader.material.uniforms.uTime.value = elapsedTime
+
   raycaster.getIntersections(player.controller1)
 
   if (player.hands) player.updatePlayerHands()
