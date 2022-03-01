@@ -14,9 +14,9 @@ export class Camera {
 
   setCamera() {
     this.camera = new THREE.PerspectiveCamera(
-      45,
+      75,
       sizes.width / sizes.height,
-      0.1,
+      0.01,
       100
     )
     this.camera.position.set(0, 1.6, 0)

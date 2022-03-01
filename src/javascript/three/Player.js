@@ -1,23 +1,56 @@
 import * as THREE from "three"
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory"
-import { camera, loaders, raycaster, renderer, scene } from "./Experience"
+import {
+  camera,
+  environment,
+  loaders,
+  raycaster,
+  renderer,
+  scene,
+} from "./Experience"
 
 // const handsModelPath = "/assets/Hands.gltf"
 
 export class Player {
   constructor() {
     this.currentIntersect = null
-    this.setPlayer()
+    this.loadPlayer()
     this.setPlayerHands()
     // raycaster.getIntersections(this.controller1)
   }
 
-  setPlayer() {
+  loadPlayer() {
+    loaders.gltfLoader.load("/assets/Character.gltf", (gltf) => {
+      this.character = gltf.scene
+
+      this.character.traverse((child) => {
+        if (
+          child instanceof THREE.Mesh &&
+          child.material instanceof THREE.MeshStandardMaterial
+        ) {
+          child.material.envMap = environment.envMap
+          child.material.envMapIntensity = 2.5
+        }
+      })
+      this.character.position.z = -2
+
+      this.mixer = new THREE.AnimationMixer(this.character)
+      this.action = this.mixer.clipAction(gltf.animations[0])
+      this.action.play()
+
+      scene.add(this.character)
+    })
+
     //Swap out this Object3D() for a playerMesh
     // this.player = new THREE.Object3D()
     // this.player.position.z = 4
     // this.player.add(camera.camera)
     // scene.add(this.player)
+  }
+
+  setPlayer() {
+    // this.character.position.z = 2
+    // this.character.add(camera.camera)
   }
 
   setPlayerHands() {
