@@ -19,6 +19,7 @@ export class Player {
     this.moveBackward = false
     this.moveLeft = false
     this.moveRight = false
+    this.isRunning = false
 
     this.velocity = new THREE.Vector3()
     this.direction = new THREE.Vector3()
@@ -84,6 +85,10 @@ export class Player {
         case "KeyD":
           this.moveRight = true
           break
+
+        case "ShiftLeft":
+          this.isRunning = true
+          break
       }
     })
 
@@ -109,30 +114,41 @@ export class Player {
         case "KeyD":
           this.moveRight = false
           break
+
+        case "ShiftLeft":
+          this.isRunning = false
+          break
       }
     })
   }
 
   updatePlayer() {
+    let playerSpeed = 0.02
+
     if (camera.controls.isLocked) {
-      //Dodgy
       this.velocity.x -= this.velocity.x
       this.velocity.z -= this.velocity.z
-
-      // this.velocity.y -= 9.8 * 100.0 * delta// 100.0 = mass
 
       this.direction.z = Number(this.moveForward) - Number(this.moveBackward)
       this.direction.x = Number(this.moveRight) - Number(this.moveLeft)
       this.direction.normalize() // this ensures consistent movements in all directions
+      
+      // Check if player is running
+      if(this.isRunning) {
+        playerSpeed = 0.04
+      }
 
       if (this.moveForward || this.moveBackward)
-        this.velocity.z -= this.direction.z * 0.05
+        this.velocity.z -= this.direction.z * playerSpeed
       if (this.moveLeft || this.moveRight)
-        this.velocity.x -= this.direction.x * 0.05
+        this.velocity.x -= this.direction.x * playerSpeed
 
       camera.controls.moveRight(-this.velocity.x)
       camera.controls.moveForward(-this.velocity.z)
     }
+
+    // this.character.position.copy(camera.camera.position)
+    // this.character.rotation.y = camera.camera.rotation.y
   }
 
   setPlayerHands() {
