@@ -11,6 +11,13 @@ import { Raycaster } from "./Raycaster"
 import { Shader } from "./Shader"
 import { Mirror } from "./Mirror"
 import { Environment } from "./Environment"
+import { PostProcessing } from "./PostProcessing"
+import {Pane} from "tweakpane"
+
+export const pane = new Pane()
+export const postProcessingFolder = pane.addFolder({
+  title: "Postprocessing"
+})
 
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -58,6 +65,8 @@ const floor = new THREE.Mesh(
 floor.rotation.x = -Math.PI / 2
 scene.add(floor)
 
+export const postProcessing = new PostProcessing()
+
 //Animate
 const clock = new THREE.Clock()
 
@@ -76,7 +85,9 @@ renderer.renderer.setAnimationLoop(() => {
 
   // camera.controls.update()
 
-  renderer.renderer.render(scene, camera.camera)
+  //Render scene
+  // renderer.renderer.render(scene, camera.camera)
+  postProcessing.effectComposer.render()
 
   stats.end()
 })

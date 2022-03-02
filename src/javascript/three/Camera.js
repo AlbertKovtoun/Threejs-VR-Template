@@ -5,9 +5,6 @@ import { canvas, scene, sizes } from "./Experience"
 
 export class Camera {
   constructor() {
-    this.camera
-    this.controls
-
     this.setCamera()
     this.setCameraControls()
   }
@@ -32,7 +29,7 @@ export class Camera {
 
     this.controls = new PointerLockControls(this.camera, document.body)
 
-    document.addEventListener("click", () => {
+    blocker.addEventListener("click", () => {
       this.controls.lock()
     })
 

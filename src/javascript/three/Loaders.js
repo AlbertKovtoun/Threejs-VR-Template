@@ -11,7 +11,7 @@ export class Loaders {
     this.loadingManager = new THREE.LoadingManager(() => {
       //Put everything here what you want to load asynsc
       player.setPlayer()
-      player.movePlayer()
+      // player.movePlayer()
     })
 
     //Textures

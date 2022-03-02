@@ -1,4 +1,4 @@
-import { camera, renderer } from "./Experience"
+import { camera, postProcessing, renderer, sizes } from "./Experience"
 
 export class Sizes {
   constructor() {
@@ -21,6 +21,9 @@ export class Sizes {
       // Update renderer
       renderer.renderer.setSize(this.width, this.height)
       renderer.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+      // Update EffectComposer
+      postProcessing.effectComposer.setSize(sizes.width, sizes.height)
     })
   }
 }

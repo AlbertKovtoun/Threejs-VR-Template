@@ -14,6 +14,12 @@ import {
 export class Player {
   constructor() {
     this.currentIntersect = null
+
+    this.moveForward = false
+    this.moveBackward = false
+    this.moveLeft = false
+    this.moveRight = false
+
     this.loadPlayer()
     this.setPlayerHands()
     // raycaster.getIntersections(this.controller1)
