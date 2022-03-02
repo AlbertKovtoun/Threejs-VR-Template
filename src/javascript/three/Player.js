@@ -132,9 +132,9 @@ export class Player {
       this.direction.z = Number(this.moveForward) - Number(this.moveBackward)
       this.direction.x = Number(this.moveRight) - Number(this.moveLeft)
       this.direction.normalize() // this ensures consistent movements in all directions
-      
+
       // Check if player is running
-      if(this.isRunning) {
+      if (this.isRunning) {
         playerSpeed = 0.04
       }
 
