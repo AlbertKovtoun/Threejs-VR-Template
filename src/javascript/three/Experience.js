@@ -12,11 +12,11 @@ import { Shader } from "./Shader"
 import { Mirror } from "./Mirror"
 import { Environment } from "./Environment"
 import { PostProcessing } from "./PostProcessing"
-import {Pane} from "tweakpane"
+import { Pane } from "tweakpane"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
-  title: "Postprocessing"
+  title: "Postprocessing",
 })
 
 const stats = new Stats()
