@@ -20,7 +20,11 @@ export class Player {
     this.moveLeft = false
     this.moveRight = false
 
+    this.velocity = new THREE.Vector3()
+    this.direction = new THREE.Vector3()
+
     this.loadPlayer()
+    this.setPlayer()
     this.setPlayerHands()
     // raycaster.getIntersections(this.controller1)
   }
@@ -57,6 +61,78 @@ export class Player {
   setPlayer() {
     // this.character.position.z = 2
     // this.character.add(camera.camera)
+
+    // Keydown
+    document.addEventListener("keydown", (ev) => {
+      switch (ev.code) {
+        case "ArrowUp":
+        case "KeyW":
+          this.moveForward = true
+          break
+
+        case "ArrowLeft":
+        case "KeyA":
+          this.moveLeft = true
+          break
+
+        case "ArrowDown":
+        case "KeyS":
+          this.moveBackward = true
+          break
+
+        case "ArrowRight":
+        case "KeyD":
+          this.moveRight = true
+          break
+      }
+    })
+
+    // Keyup
+    document.addEventListener("keyup", (ev) => {
+      switch (ev.code) {
+        case "ArrowUp":
+        case "KeyW":
+          this.moveForward = false
+          break
+
+        case "ArrowLeft":
+        case "KeyA":
+          this.moveLeft = false
+          break
+
+        case "ArrowDown":
+        case "KeyS":
+          this.moveBackward = false
+          break
+
+        case "ArrowRight":
+        case "KeyD":
+          this.moveRight = false
+          break
+      }
+    })
+  }
+
+  updatePlayer() {
+    if (camera.controls.isLocked) {
+      //Dodgy
+      this.velocity.x -= this.velocity.x
+      this.velocity.z -= this.velocity.z
+
+      // this.velocity.y -= 9.8 * 100.0 * delta// 100.0 = mass
+
+      this.direction.z = Number(this.moveForward) - Number(this.moveBackward)
+      this.direction.x = Number(this.moveRight) - Number(this.moveLeft)
+      this.direction.normalize() // this ensures consistent movements in all directions
+
+      if (this.moveForward || this.moveBackward)
+        this.velocity.z -= this.direction.z * 0.05
+      if (this.moveLeft || this.moveRight)
+        this.velocity.x -= this.direction.x * 0.05
+
+      camera.controls.moveRight(-this.velocity.x)
+      camera.controls.moveForward(-this.velocity.z)
+    }
   }
 
   setPlayerHands() {

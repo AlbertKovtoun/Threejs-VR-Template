@@ -13,7 +13,7 @@ import {
 export class PostProcessing {
   constructor() {
     this.setPostProcessing()
-    this.setPostProcessingTweaks()
+    // this.setPostProcessingTweaks()
   }
 
   setPostProcessing() {
@@ -24,11 +24,11 @@ export class PostProcessing {
     this.renderPass = new RenderPass(scene, camera.camera)
     this.effectComposer.addPass(this.renderPass)
 
-    this.unrealBloomPass = new UnrealBloomPass()
-    this.unrealBloomPass.strength = 0.1
-    this.unrealBloomPass.radius = 1
-    this.unrealBloomPass.threshold = 0
-    this.effectComposer.addPass(this.unrealBloomPass)
+    // this.unrealBloomPass = new UnrealBloomPass()
+    // this.unrealBloomPass.strength = 0.1
+    // this.unrealBloomPass.radius = 1
+    // this.unrealBloomPass.threshold = 0
+    // this.effectComposer.addPass(this.unrealBloomPass)
   }
 
   setPostProcessingTweaks() {
