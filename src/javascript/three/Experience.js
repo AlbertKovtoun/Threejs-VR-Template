@@ -57,7 +57,7 @@ const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(20, 20, 2, 2),
   new THREE.MeshStandardMaterial({
     color: "black",
-    roughness: 0,
+    roughness: 0.5,
     envMap: environment.envMap,
     envMapIntensity: 2.5,
   })
@@ -84,7 +84,7 @@ renderer.renderer.setAnimationLoop(() => {
   if (player.hands) player.updatePlayerHands()
 
   // camera.controls.update()
-  if(player.character) player.updatePlayer()
+  if (player.character) player.updatePlayer()
 
   //Render scene
   // renderer.renderer.render(scene, camera.camera)

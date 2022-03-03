@@ -43,12 +43,18 @@ export class Player {
           child.material.envMapIntensity = 2.5
         }
       })
-      this.character.position.z = -2
+
+      //SkeletonHelper
+      const skeleton = new THREE.SkeletonHelper(this.character)
+      scene.add(skeleton)
+
+      this.characterAnimations = gltf.animations
 
       this.mixer = new THREE.AnimationMixer(this.character)
-      this.action = this.mixer.clipAction(gltf.animations[0])
+      this.action = this.mixer.clipAction(this.characterAnimations[0])
       this.action.play()
 
+      this.character.position.z = -2
       scene.add(this.character)
     })
 
@@ -148,6 +154,12 @@ export class Player {
     }
 
     // this.character.position.copy(camera.camera.position)
+    this.character.position.x = camera.camera.position.x
+    this.character.position.z = camera.camera.position.z
+
+    this.character.rotation.copy(camera.camera.rotation)
+
+    //Still need to fix this. This ain't right chief
     // this.character.rotation.y = camera.camera.rotation.y
   }
 
