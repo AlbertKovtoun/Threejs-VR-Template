@@ -181,15 +181,21 @@ export class Player {
 
     //EventListener for when user is pressing main button
     this.controller1.addEventListener("selectstart", () => {
+      if (raycaster.leftControllerOptions.currentIntersect) {
+        //If statement to check which object is being clicked on
+        if (raycaster.leftControllerOptions.currentIntersect.object.name === "OBJECT") {
+          console.log("Clicked on OBJECT")
+          raycaster.object.material.color = new THREE.Color(0xff0000)
+        }
+      }
+    })
+
+    this.controller2.addEventListener("selectstart", () => {
       if (raycaster.rightControllerOptions.currentIntersect) {
         //If statement to check which object is being clicked on
         if (raycaster.rightControllerOptions.currentIntersect.object.name === "OBJECT") {
           console.log("Clicked on OBJECT")
-          raycaster.object.material.color = new THREE.Color(
-            Math.random(),
-            Math.random(),
-            Math.random()
-          )
+          raycaster.object.material.color = new THREE.Color(0x00ff00)
         }
       }
     })

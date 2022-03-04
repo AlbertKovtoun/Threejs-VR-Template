@@ -34,31 +34,31 @@ export class Raycaster {
     this.group.add(this.object)
   }
 
-  // getLeftControllerIntersections(controller1) {
-  //   this.rightControllerOptions.tempMatrix.identity().extractRotation(controller1.matrixWorld)
-  //   this.rightControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller1.matrixWorld)
-  //   this.rightControllerOptions.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.rightControllerOptions.tempMatrix)
-  //   const intersects = this.rightControllerOptions.raycaster.intersectObjects(
-  //     this.group.children,
-  //     false
-  //   )
+  getLeftControllerIntersections(controller1) {
+    this.leftControllerOptions.tempMatrix.identity().extractRotation(controller1.matrixWorld)
+    this.leftControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller1.matrixWorld)
+    this.leftControllerOptions.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.leftControllerOptions.tempMatrix)
+    const intersects = this.leftControllerOptions.raycaster.intersectObjects(
+      this.group.children,
+      false
+    )
 
-  //   if (intersects.length) {
-  //     if (!this.rightControllerOptions.currentIntersect) {
-  //       console.log("Raycaster Entered object")
-  //     }
-  //     this.rightControllerOptions.currentIntersect = intersects[0]
-  //   } else {
-  //     if (this.rightControllerOptions.currentIntersect) {
-  //       console.log("Raycaster Left object")
-  //     }
-  //     this.rightControllerOptions.currentIntersect = null
-  //   }
-  // }
+    if (intersects.length) {
+      if (!this.leftControllerOptions.currentIntersect) {
+        console.log("Raycaster Entered object")
+      }
+      this.leftControllerOptions.currentIntersect = intersects[0]
+    } else {
+      if (this.leftControllerOptions.currentIntersect) {
+        console.log("Raycaster Left object")
+      }
+      this.leftControllerOptions.currentIntersect = null
+    }
+  }
 
-  getRightControllerIntersections(controller1) {
-    this.rightControllerOptions.tempMatrix.identity().extractRotation(controller1.matrixWorld)
-    this.rightControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller1.matrixWorld)
+  getRightControllerIntersections(controller2) {
+    this.rightControllerOptions.tempMatrix.identity().extractRotation(controller2.matrixWorld)
+    this.rightControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller2.matrixWorld)
     this.rightControllerOptions.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.rightControllerOptions.tempMatrix)
     const intersects = this.rightControllerOptions.raycaster.intersectObjects(
       this.group.children,

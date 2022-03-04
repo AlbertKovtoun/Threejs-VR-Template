@@ -79,6 +79,7 @@ renderer.renderer.setAnimationLoop(() => {
 
   if (player.mixer) player.mixer.update(0.005)
 
+  raycaster.getLeftControllerIntersections(player.controller2)
   raycaster.getRightControllerIntersections(player.controller1)
 
   if (player.hands) player.updatePlayerHands()
