@@ -45,12 +45,12 @@ export class Raycaster {
 
     if (intersects.length) {
       if (!this.leftControllerOptions.currentIntersect) {
-        console.log("Raycaster Entered object")
+        console.log("LEFT Raycaster Entered object")
       }
       this.leftControllerOptions.currentIntersect = intersects[0]
     } else {
       if (this.leftControllerOptions.currentIntersect) {
-        console.log("Raycaster Left object")
+        console.log("LEFT Raycaster Left object")
       }
       this.leftControllerOptions.currentIntersect = null
     }
@@ -67,12 +67,12 @@ export class Raycaster {
 
     if (intersects.length) {
       if (!this.rightControllerOptions.currentIntersect) {
-        console.log("Raycaster Entered object")
+        console.log("RIGHT Raycaster Entered object")
       }
       this.rightControllerOptions.currentIntersect = intersects[0]
     } else {
       if (this.rightControllerOptions.currentIntersect) {
-        console.log("Raycaster Left object")
+        console.log("RIGHT Raycaster Left object")
       }
       this.rightControllerOptions.currentIntersect = null
     }
