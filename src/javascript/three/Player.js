@@ -27,7 +27,7 @@ export class Player {
     this.loadPlayer()
     this.setPlayer()
     this.setPlayerHands()
-    // raycaster.getIntersections(this.controller1)
+    this.checkIntersections()
   }
 
   loadPlayer() {
@@ -52,7 +52,7 @@ export class Player {
 
       this.mixer = new THREE.AnimationMixer(this.character)
       this.action = this.mixer.clipAction(this.characterAnimations[0])
-      this.action.play()
+      // this.action.play()
 
       this.character.position.z = -2
       scene.add(this.character)
@@ -179,32 +179,6 @@ export class Player {
     //Right Controller
     this.controller2 = renderer.renderer.xr.getController(1)
 
-    //EventListener for when user is pressing main button
-    this.controller1.addEventListener("selectstart", () => {
-      if (raycaster.leftControllerOptions.currentIntersect) {
-        //If statement to check which object is being clicked on
-        if (
-          raycaster.leftControllerOptions.currentIntersect.object.name ===
-          "OBJECT"
-        ) {
-          console.log("LEFT Clicked on OBJECT")
-          raycaster.object.material.color = new THREE.Color(0xff0000)
-        }
-      }
-    })
-
-    this.controller2.addEventListener("selectstart", () => {
-      if (raycaster.rightControllerOptions.currentIntersect) {
-        //If statement to check which object is being clicked on
-        if (
-          raycaster.rightControllerOptions.currentIntersect.object.name ===
-          "OBJECT"
-        ) {
-          console.log("RIGHT Clicked on OBJECT")
-          raycaster.object.material.color = new THREE.Color(0x00ff00)
-        }
-      }
-    })
     scene.add(this.controller1, this.controller2)
 
     this.controllerModelFactory = new XRControllerModelFactory()
@@ -247,5 +221,34 @@ export class Player {
     // this.rightHand.rotation.copy(
     //   renderer.renderer.xr.getControllerGrip(1).rotation
     // )
+  }
+
+  checkIntersections() {
+    //EventListener for when user is pressing main button
+    this.controller1.addEventListener("selectstart", () => {
+      if (raycaster.leftControllerOptions.currentIntersect) {
+        //If statement to check which object is being clicked on
+        if (
+          raycaster.leftControllerOptions.currentIntersect.object.name ===
+          "OBJECT"
+        ) {
+          console.log("Left controller Clicked on OBJECT")
+          raycaster.object.material.color = new THREE.Color(0xff0000)
+        }
+      }
+    })
+
+    this.controller2.addEventListener("selectstart", () => {
+      if (raycaster.rightControllerOptions.currentIntersect) {
+        //If statement to check which object is being clicked on
+        if (
+          raycaster.rightControllerOptions.currentIntersect.object.name ===
+          "OBJECT"
+        ) {
+          console.log("Right Clicked on OBJECT")
+          raycaster.object.material.color = new THREE.Color(0x00ff00)
+        }
+      }
+    })
   }
 }

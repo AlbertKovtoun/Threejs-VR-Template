@@ -26,7 +26,7 @@ export class Raycaster {
     scene.add(this.group)
 
     this.object = new THREE.Mesh(
-      new THREE.BoxGeometry(1),
+      new THREE.SphereGeometry(1, 20, 20),
       new THREE.MeshBasicMaterial({ color: "" })
     )
     this.object.name = "OBJECT"
