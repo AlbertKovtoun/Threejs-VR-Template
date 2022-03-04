@@ -1,8 +1,14 @@
 import * as THREE from "three"
-import { player, scene } from "./Experience"
+import { camera, player, scene } from "./Experience"
 
 export class Raycaster {
   constructor() {
+    // this.currentIntersect = null
+    this.firstPersonOptions = {
+      raycaster: new THREE.Raycaster(),
+      currentIntersect: null,
+    }
+
     this.leftControllerOptions = {
       raycaster: new THREE.Raycaster(),
       tempMatrix: new THREE.Matrix4(),
@@ -32,6 +38,32 @@ export class Raycaster {
     this.object.name = "OBJECT"
     this.object.position.set(0, 0.5, -5)
     this.group.add(this.object)
+  }
+
+  getFirstPersonIntersections() {
+    //Cast a ray from the center of the canvas
+    this.firstPersonOptions.raycaster.setFromCamera(
+      new THREE.Vector2(0, 0),
+      camera.camera
+    )
+
+    const intersects = this.firstPersonOptions.raycaster.intersectObjects(
+      this.group.children
+    )
+
+    if (intersects.length) {
+      if (!this.firstPersonOptions.currentIntersect) {
+        console.log("mouse enter")
+      }
+
+      this.firstPersonOptions.currentIntersect = intersects[0]
+    } else {
+      if (this.firstPersonOptions.currentIntersect) {
+        console.log("mouse leave")
+      }
+
+      this.firstPersonOptions.currentIntersect = null
+    }
   }
 
   getLeftControllerIntersections(controller1) {

@@ -224,6 +224,24 @@ export class Player {
   }
 
   checkIntersections() {
+    //First Person View (from the center)
+    document.addEventListener("click", () => {
+      if (raycaster.firstPersonOptions.currentIntersect) {
+        //If statement to check which object is being clicked on
+        if (
+          raycaster.firstPersonOptions.currentIntersect.object.name === "OBJECT"
+        ) {
+          console.log("Left controller Clicked on OBJECT")
+          raycaster.object.material.color = new THREE.Color(
+            Math.random(),
+            Math.random(),
+            Math.random()
+          )
+        }
+      }
+    })
+
+    //Left controller in VR
     //EventListener for when user is pressing main button
     this.controller1.addEventListener("selectstart", () => {
       if (raycaster.leftControllerOptions.currentIntersect) {
@@ -238,6 +256,7 @@ export class Player {
       }
     })
 
+    //Right controller in VR
     this.controller2.addEventListener("selectstart", () => {
       if (raycaster.rightControllerOptions.currentIntersect) {
         //If statement to check which object is being clicked on
