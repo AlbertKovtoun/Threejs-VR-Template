@@ -174,14 +174,16 @@ export class Player {
     //   scene.add(this.hands)
     // })
 
-    this.controller1 = renderer.renderer.xr.getController(0)
-    this.controller2 = renderer.renderer.xr.getController(1)
+    //Left Controller
+    this.controller1 = renderer.renderer.xr.getController(1)
+    //Right Controller
+    this.controller2 = renderer.renderer.xr.getController(0)
 
     //EventListener for when user is pressing main button
     this.controller1.addEventListener("selectstart", () => {
-      if (raycaster.currentIntersect) {
+      if (raycaster.rightControllerOptions.currentIntersect) {
         //If statement to check which object is being clicked on
-        if (raycaster.currentIntersect.object.name === "OBJECT") {
+        if (raycaster.rightControllerOptions.currentIntersect.object.name === "OBJECT") {
           console.log("Clicked on OBJECT")
           raycaster.object.material.color = new THREE.Color(
             Math.random(),

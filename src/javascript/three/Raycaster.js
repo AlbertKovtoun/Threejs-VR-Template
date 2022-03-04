@@ -3,12 +3,16 @@ import { player, scene } from "./Experience"
 
 export class Raycaster {
   constructor() {
+    this.rightControllerOptions = {
+      raycaster: new THREE.Raycaster(),
+      tempMatrix: new THREE.Matrix4(),
+      currentIntersect: null
+    }
     this.raycaster = new THREE.Raycaster()
     this.tempMatrix = new THREE.Matrix4()
     this.currentIntersect = null
 
     this.setObjectsToTest()
-    this.setVRRaycaster()
   }
 
   setObjectsToTest() {
@@ -24,27 +28,25 @@ export class Raycaster {
     this.group.add(this.object)
   }
 
-  setVRRaycaster() {}
-
-  getIntersections(controller1) {
-    this.tempMatrix.identity().extractRotation(controller1.matrixWorld)
-    this.raycaster.ray.origin.setFromMatrixPosition(controller1.matrixWorld)
-    this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.tempMatrix)
-    const intersects = this.raycaster.intersectObjects(
+  getRightControllerIntersections(controller1) {
+    this.rightControllerOptions.tempMatrix.identity().extractRotation(controller1.matrixWorld)
+    this.rightControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller1.matrixWorld)
+    this.rightControllerOptions.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.rightControllerOptions.tempMatrix)
+    const intersects = this.rightControllerOptions.raycaster.intersectObjects(
       this.group.children,
       false
     )
 
     if (intersects.length) {
-      if (!this.currentIntersect) {
+      if (!this.rightControllerOptions.currentIntersect) {
         console.log("Raycaster Entered object")
       }
-      this.currentIntersect = intersects[0]
+      this.rightControllerOptions.currentIntersect = intersects[0]
     } else {
-      if (this.currentIntersect) {
+      if (this.rightControllerOptions.currentIntersect) {
         console.log("Raycaster Left object")
       }
-      this.currentIntersect = null
+      this.rightControllerOptions.currentIntersect = null
     }
   }
 }
