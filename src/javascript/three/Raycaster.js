@@ -6,13 +6,13 @@ export class Raycaster {
     this.leftControllerOptions = {
       raycaster: new THREE.Raycaster(),
       tempMatrix: new THREE.Matrix4(),
-      currentIntersect: null
+      currentIntersect: null,
     }
 
     this.rightControllerOptions = {
       raycaster: new THREE.Raycaster(),
       tempMatrix: new THREE.Matrix4(),
-      currentIntersect: null
+      currentIntersect: null,
     }
     this.raycaster = new THREE.Raycaster()
     this.tempMatrix = new THREE.Matrix4()
@@ -35,9 +35,15 @@ export class Raycaster {
   }
 
   getLeftControllerIntersections(controller1) {
-    this.leftControllerOptions.tempMatrix.identity().extractRotation(controller1.matrixWorld)
-    this.leftControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller1.matrixWorld)
-    this.leftControllerOptions.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.leftControllerOptions.tempMatrix)
+    this.leftControllerOptions.tempMatrix
+      .identity()
+      .extractRotation(controller1.matrixWorld)
+    this.leftControllerOptions.raycaster.ray.origin.setFromMatrixPosition(
+      controller1.matrixWorld
+    )
+    this.leftControllerOptions.raycaster.ray.direction
+      .set(0, 0, -1)
+      .applyMatrix4(this.leftControllerOptions.tempMatrix)
     const intersects = this.leftControllerOptions.raycaster.intersectObjects(
       this.group.children,
       false
@@ -57,9 +63,15 @@ export class Raycaster {
   }
 
   getRightControllerIntersections(controller2) {
-    this.rightControllerOptions.tempMatrix.identity().extractRotation(controller2.matrixWorld)
-    this.rightControllerOptions.raycaster.ray.origin.setFromMatrixPosition(controller2.matrixWorld)
-    this.rightControllerOptions.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.rightControllerOptions.tempMatrix)
+    this.rightControllerOptions.tempMatrix
+      .identity()
+      .extractRotation(controller2.matrixWorld)
+    this.rightControllerOptions.raycaster.ray.origin.setFromMatrixPosition(
+      controller2.matrixWorld
+    )
+    this.rightControllerOptions.raycaster.ray.direction
+      .set(0, 0, -1)
+      .applyMatrix4(this.rightControllerOptions.tempMatrix)
     const intersects = this.rightControllerOptions.raycaster.intersectObjects(
       this.group.children,
       false
