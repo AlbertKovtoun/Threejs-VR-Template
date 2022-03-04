@@ -175,9 +175,9 @@ export class Player {
     // })
 
     //Left Controller
-    this.controller1 = renderer.renderer.xr.getController(1)
+    this.controller1 = renderer.renderer.xr.getController(0)
     //Right Controller
-    this.controller2 = renderer.renderer.xr.getController(0)
+    this.controller2 = renderer.renderer.xr.getController(1)
 
     //EventListener for when user is pressing main button
     this.controller1.addEventListener("selectstart", () => {
