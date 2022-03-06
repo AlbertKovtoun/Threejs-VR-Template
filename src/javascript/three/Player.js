@@ -2,6 +2,7 @@ import * as THREE from "three"
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory"
 import {
   camera,
+  collisionDetector,
   environment,
   loaders,
   raycaster,
@@ -14,6 +15,8 @@ import {
 export class Player {
   constructor() {
     this.currentIntersect = null
+    this.prevPositionX = null
+    this.prevPositionZ = null
 
     this.moveForward = false
     this.moveBackward = false
@@ -149,8 +152,21 @@ export class Player {
       if (this.moveLeft || this.moveRight)
         this.velocity.x -= this.direction.x * playerSpeed
 
-      camera.controls.moveRight(-this.velocity.x)
-      camera.controls.moveForward(-this.velocity.z)
+      if (collisionDetector.movementBlocked) {
+        // Option1
+        camera.camera.position.x = Math.round(this.prevPositionX)
+        camera.camera.position.z = Math.round(this.prevPositionZ)
+
+        //Option2
+        // camera.camera.position.x = Math.round((this.prevPositionX + Number.EPSILON) * 10) / 10
+        // camera.camera.position.z = Math.round((this.prevPositionZ + Number.EPSILON) * 10) / 10
+      } else {
+        camera.controls.moveRight(-this.velocity.x)
+        camera.controls.moveForward(-this.velocity.z)
+      }
+
+      this.prevPositionX = camera.camera.position.x
+      this.prevPositionZ = camera.camera.position.z
     }
 
     // this.character.position.copy(camera.camera.position)

@@ -13,6 +13,7 @@ import { Mirror } from "./Mirror"
 import { Environment } from "./Environment"
 import { PostProcessing } from "./PostProcessing"
 import { Pane } from "tweakpane"
+import { CollisionDetector } from "./CollisionDetector"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -53,17 +54,7 @@ export const mirror = new Mirror()
 
 export const player = new Player()
 
-const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(20, 20, 2, 2),
-  new THREE.MeshStandardMaterial({
-    color: "black",
-    roughness: 0.5,
-    envMap: environment.envMap,
-    envMapIntensity: 2.5,
-  })
-)
-floor.rotation.x = -Math.PI / 2
-scene.add(floor)
+export const collisionDetector = new CollisionDetector()
 
 export const postProcessing = new PostProcessing()
 
@@ -82,6 +73,7 @@ renderer.renderer.setAnimationLoop(() => {
   raycaster.getFirstPersonIntersections()
   raycaster.getLeftControllerIntersections(player.controller1)
   raycaster.getRightControllerIntersections(player.controller2)
+  if (player.character) collisionDetector.updateRaycaster()
 
   if (player.hands) player.updatePlayerHands()
 
