@@ -46,6 +46,9 @@ export class Player {
           child.material.envMap = environment.envMap
           child.material.envMapIntensity = 2.5
         }
+
+        // Avoids the mesh from dissapearing
+        // child.frustumCulled = false
       })
 
       //SkeletonHelper
@@ -56,7 +59,7 @@ export class Player {
       console.log(this.characterAnimations)
 
       this.mixer = new THREE.AnimationMixer(this.character)
-      this.action = this.mixer.clipAction(this.characterAnimations[0])
+      this.action = this.mixer.clipAction(this.characterAnimations[3])
       this.action.play()
 
       this.character.position.z = -2
@@ -171,7 +174,7 @@ export class Player {
         camera.controls.moveForward(-this.velocity.z)
       }
 
-      if (this.frameCounter === 10) {
+      if (this.frameCounter === 20) {
         this.prevPositionX = camera.camera.position.x
         this.prevPositionZ = camera.camera.position.z
         this.frameCounter = 0

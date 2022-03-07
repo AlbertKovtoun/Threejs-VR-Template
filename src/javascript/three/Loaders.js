@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { player } from "./Experience"
+import { finiteStateMachine, player } from "./Experience"
 
 export class Loaders {
   constructor() {
@@ -11,7 +11,7 @@ export class Loaders {
     this.loadingManager = new THREE.LoadingManager(() => {
       //Put everything here what you want to load asynsc
       player.setPlayer()
-      // player.movePlayer()
+      finiteStateMachine.setFiniteStateMachine(player.character)
     })
 
     //Textures
