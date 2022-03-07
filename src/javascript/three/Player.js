@@ -15,6 +15,7 @@ import {
 export class Player {
   constructor() {
     this.currentIntersect = null
+    this.frameCounter = 0
     this.prevPositionX = null
     this.prevPositionZ = null
 
@@ -157,7 +158,11 @@ export class Player {
         camera.camera.position.x = Math.round(this.prevPositionX)
         camera.camera.position.z = Math.round(this.prevPositionZ)
 
-        //Option2
+        // Option2
+        // camera.camera.position.x = this.prevPositionX
+        // camera.camera.position.z = this.prevPositionZ
+
+        //Option3
         // camera.camera.position.x = Math.round((this.prevPositionX + Number.EPSILON) * 10) / 10
         // camera.camera.position.z = Math.round((this.prevPositionZ + Number.EPSILON) * 10) / 10
       } else {
@@ -165,8 +170,19 @@ export class Player {
         camera.controls.moveForward(-this.velocity.z)
       }
 
-      this.prevPositionX = camera.camera.position.x
-      this.prevPositionZ = camera.camera.position.z
+      if (this.frameCounter === 10) {
+        this.prevPositionX = camera.camera.position.x
+        this.prevPositionZ = camera.camera.position.z
+        this.frameCounter = 0
+      } else {
+        this.frameCounter++
+      }
+
+      if (collisionDetector.playerIsStuck) {
+        camera.camera.position.x = 0
+        camera.camera.position.z = 0
+        collisionDetector.playerIsStuck = false
+      }
     }
 
     // this.character.position.copy(camera.camera.position)
