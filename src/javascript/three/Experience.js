@@ -71,7 +71,8 @@ renderer.renderer.setAnimationLoop(() => {
 
   // shader.shader.material.uniforms.uTime.value = elapsedTime
 
-  if (player.mixer) player.mixer.update(0.005)
+  // if (player.mixer) player.mixer.update(0.005)
+  if (finiteStateMachine.mixer) finiteStateMachine.mixer.update(0.005)
 
   raycaster.getFirstPersonIntersections()
   raycaster.getLeftControllerIntersections(player.controller1)

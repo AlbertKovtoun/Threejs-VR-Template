@@ -15,7 +15,7 @@ export class Mirror {
       color: 0x777777,
     })
     this.mirror.rotation.y = -Math.PI / 2
-    this.mirror.position.x = 1
+    this.mirror.position.x = 2
     scene.add(this.mirror)
   }
 }

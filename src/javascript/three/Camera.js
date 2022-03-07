@@ -16,6 +16,7 @@ export class Camera {
       0.01,
       100
     )
+    this.camera.rotation.set(0, -Math.PI / 2, 0)
     this.camera.position.set(0, 1.6, 0)
     scene.add(this.camera)
   }

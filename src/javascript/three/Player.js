@@ -36,6 +36,7 @@ export class Player {
 
   loadPlayer() {
     loaders.gltfLoader.load("/assets/Character-Animated-2.gltf", (gltf) => {
+      this.characterParent = gltf
       this.character = gltf.scene
 
       this.character.traverse((child) => {
@@ -50,17 +51,6 @@ export class Player {
         // Avoids the mesh from dissapearing
         // child.frustumCulled = false
       })
-
-      //SkeletonHelper
-      const skeleton = new THREE.SkeletonHelper(this.character)
-      scene.add(skeleton)
-
-      this.characterAnimations = gltf.animations
-      console.log(this.characterAnimations)
-
-      this.mixer = new THREE.AnimationMixer(this.character)
-      this.action = this.mixer.clipAction(this.characterAnimations[3])
-      this.action.play()
 
       this.character.position.z = -2
       scene.add(this.character)
