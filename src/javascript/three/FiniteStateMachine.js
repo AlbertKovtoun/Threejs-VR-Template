@@ -30,10 +30,15 @@ export class FiniteStateMachine {
       this.characterAnimations[2]
     )
     //WALK FORWARD
-    this.walkForwardAnimation = this.mixer.clipAction(this.characterAnimations[3])
+    this.walkForwardAnimation = this.mixer.clipAction(
+      this.characterAnimations[3]
+    )
+    //WALK BACKWARD
+    this.walkBackwardAnimation = this.mixer.clipAction(
+      this.characterAnimations[4]
+    )
 
     //WALK BACKWARD
-    this.walkBackward = this.walkForwardAnimation.timeScale * -1
     this.idleAnimation.play()
     // this.walkAnimation.play()
     // this.strafeLeftAnimation.play()
@@ -96,7 +101,7 @@ export class FiniteStateMachine {
 
     setTimeout(() => {
       startAnimation.stop()
-    }, duration * 1000 + 100)
+    }, duration * 1000 + 50)
   }
 
   setFiniteStateMachineTweaks() {

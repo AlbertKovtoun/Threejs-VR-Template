@@ -36,7 +36,7 @@ export class Player {
   }
 
   loadPlayer() {
-    loaders.gltfLoader.load("/assets/Character-Animated-2.gltf", (gltf) => {
+    loaders.gltfLoader.load("/assets/Character-Animated-3.gltf", (gltf) => {
       this.characterParent = gltf
       this.character = gltf.scene
 
@@ -86,16 +86,31 @@ export class Player {
           case "ArrowLeft":
           case "KeyA":
             this.moveLeft = true
+            finiteStateMachine.changeAnimation(
+              finiteStateMachine.idleAnimation,
+              finiteStateMachine.strafeLeftAnimation,
+              0.1
+            )
             break
 
           case "ArrowDown":
           case "KeyS":
             this.moveBackward = true
+            finiteStateMachine.changeAnimation(
+              finiteStateMachine.idleAnimation,
+              finiteStateMachine.walkBackwardAnimation,
+              0.1
+            )
             break
 
           case "ArrowRight":
           case "KeyD":
             this.moveRight = true
+            finiteStateMachine.changeAnimation(
+              finiteStateMachine.idleAnimation,
+              finiteStateMachine.strafeRightAnimation,
+              0.1
+            )
             break
 
           case "ShiftLeft":
@@ -121,16 +136,31 @@ export class Player {
         case "ArrowLeft":
         case "KeyA":
           this.moveLeft = false
+          finiteStateMachine.changeAnimation(
+            finiteStateMachine.strafeLeftAnimation,
+            finiteStateMachine.idleAnimation,
+            0.1
+          )
           break
 
         case "ArrowDown":
         case "KeyS":
           this.moveBackward = false
+          finiteStateMachine.changeAnimation(
+            finiteStateMachine.walkBackwardAnimation,
+            finiteStateMachine.idleAnimation,
+            0.1
+          )
           break
 
         case "ArrowRight":
         case "KeyD":
           this.moveRight = false
+          finiteStateMachine.changeAnimation(
+            finiteStateMachine.strafeRightAnimation,
+            finiteStateMachine.idleAnimation,
+            0.1
+          )
           break
 
         case "ShiftLeft":
