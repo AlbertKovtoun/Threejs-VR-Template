@@ -4,6 +4,7 @@ import {
   camera,
   collisionDetector,
   environment,
+  finiteStateMachine,
   loaders,
   raycaster,
   renderer,
