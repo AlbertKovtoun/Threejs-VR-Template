@@ -30,11 +30,18 @@ export class FiniteStateMachine {
       this.characterAnimations[2]
     )
     //WALK FORWARD
-    this.walkAnimation = this.mixer.clipAction(this.characterAnimations[3])
+    this.walkForwardAnimation = this.mixer.clipAction(this.characterAnimations[3])
 
     //WALK BACKWARD
-    // this.walkAnimation.timeScale = -1
+    this.walkBackward = this.walkForwardAnimation.timeScale * -1
     this.idleAnimation.play()
+    // this.walkAnimation.play()
+    // this.strafeLeftAnimation.play()
+    // this.strafeRightAnimation.play()
+    // this.idleAnimation.setEffectiveWeight(1)
+    // this.walkAnimation.setEffectiveWeight(0)
+    // this.strafeLeftAnimation.setEffectiveWeight(0)
+    // this.strafeRightAnimation.setEffectiveWeight(0)
   }
 
   // prepareCrossFade(startAction, endAction, defaultDuration) {
@@ -83,6 +90,15 @@ export class FiniteStateMachine {
   //   action.setEffectiveWeight(weight)
   // }
 
+  changeAnimation(startAnimation, endAnimation, duration) {
+    startAnimation.crossFadeTo(endAnimation, duration)
+    endAnimation.play()
+
+    setTimeout(() => {
+      startAnimation.stop()
+    }, duration * 1000 + 100)
+  }
+
   setFiniteStateMachineTweaks() {
     this.btn1 = pane.addButton({
       label: "Idle to Walk",
@@ -94,14 +110,10 @@ export class FiniteStateMachine {
     })
 
     this.btn1.on("click", () => {
-      // this.prepareCrossFade(this.idleAnimation, this.walkAnimation, 0.2)
-      this.walkAnimation.crossFadeFrom(this.idleAnimation, 0.5)
-      this.walkAnimation.play()
+      this.changeAnimation(this.idleAnimation, this.walkAnimation, 0.2)
     })
     this.btn2.on("click", () => {
-      // this.prepareCrossFade(this.walkAnimation, this.strafeLeftAnimation, 0.2)
-      this.strafeLeftAnimation.crossFadeFrom(this.walkAnimation, 0.2)
-      this.strafeLeftAnimation.play()
+      this.changeAnimation(this.walkAnimation, this.idleAnimation, 0.2)
     })
   }
 }

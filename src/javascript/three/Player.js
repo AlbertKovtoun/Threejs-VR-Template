@@ -48,7 +48,6 @@ export class Player {
           child.material.envMap = environment.envMap
           child.material.envMapIntensity = 2.5
         }
-
         // Avoids the mesh from dissapearing
         // child.frustumCulled = false
       })
@@ -70,30 +69,39 @@ export class Player {
 
     // Keydown
     document.addEventListener("keydown", (ev) => {
-      switch (ev.code) {
-        case "ArrowUp":
-        case "KeyW":
-          this.moveForward = true
-          break
+      if (!ev.repeat) {
+        console.log(ev.key)
 
-        case "ArrowLeft":
-        case "KeyA":
-          this.moveLeft = true
-          break
+        switch (ev.code) {
+          case "ArrowUp":
+          case "KeyW":
+            this.moveForward = true
+            finiteStateMachine.changeAnimation(
+              finiteStateMachine.idleAnimation,
+              finiteStateMachine.walkForwardAnimation,
+              0.1
+            )
+            break
 
-        case "ArrowDown":
-        case "KeyS":
-          this.moveBackward = true
-          break
+          case "ArrowLeft":
+          case "KeyA":
+            this.moveLeft = true
+            break
 
-        case "ArrowRight":
-        case "KeyD":
-          this.moveRight = true
-          break
+          case "ArrowDown":
+          case "KeyS":
+            this.moveBackward = true
+            break
 
-        case "ShiftLeft":
-          this.isRunning = true
-          break
+          case "ArrowRight":
+          case "KeyD":
+            this.moveRight = true
+            break
+
+          case "ShiftLeft":
+            this.isRunning = true
+            break
+        }
       }
     })
 
@@ -103,6 +111,11 @@ export class Player {
         case "ArrowUp":
         case "KeyW":
           this.moveForward = false
+          finiteStateMachine.changeAnimation(
+            finiteStateMachine.walkForwardAnimation,
+            finiteStateMachine.idleAnimation,
+            0.1
+          )
           break
 
         case "ArrowLeft":
@@ -128,7 +141,7 @@ export class Player {
   }
 
   updatePlayer() {
-    let playerSpeed = 0.002
+    let playerSpeed = 0.001
 
     if (camera.controls.isLocked) {
       this.velocity.x -= this.velocity.x * 0.1 //Momentum (lower = more momentum)
