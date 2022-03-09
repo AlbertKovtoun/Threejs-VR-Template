@@ -14,7 +14,7 @@ import { Environment } from "./Environment"
 import { PostProcessing } from "./PostProcessing"
 import { Pane } from "tweakpane"
 import { CollisionDetector } from "./CollisionDetector"
-import {FiniteStateMachine} from "./FiniteStateMachine"
+import { FiniteStateMachine } from "./FiniteStateMachine"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -63,16 +63,22 @@ export const postProcessing = new PostProcessing()
 
 //Animate
 const clock = new THREE.Clock()
+let time = Date.now()
 
 renderer.renderer.setAnimationLoop(() => {
   stats.begin()
 
   const elapsedTime = clock.getElapsedTime()
 
+  const currentTime = Date.now()
+  const deltaTime = currentTime - time
+  time = currentTime
+
   // shader.shader.material.uniforms.uTime.value = elapsedTime
 
   // if (player.mixer) player.mixer.update(0.005)
-  if (finiteStateMachine.mixer) finiteStateMachine.mixer.update(0.005)
+  if (finiteStateMachine.mixer)
+    finiteStateMachine.mixer.update(deltaTime * 0.001)
 
   raycaster.getFirstPersonIntersections()
   raycaster.getLeftControllerIntersections(player.controller1)

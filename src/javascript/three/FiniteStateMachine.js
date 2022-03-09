@@ -40,7 +40,6 @@ export class FiniteStateMachine {
     //Speed up the backward animation a bit
     this.walkBackwardAnimation.timeScale = 2
 
-    //WALK BACKWARD
     this.idleAnimation.play()
   }
 

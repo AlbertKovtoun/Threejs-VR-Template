@@ -79,7 +79,7 @@ export class Player {
             finiteStateMachine.changeAnimation(
               finiteStateMachine.idleAnimation,
               finiteStateMachine.walkForwardAnimation,
-              0.1
+              0.2
             )
             break
 
@@ -89,7 +89,7 @@ export class Player {
             finiteStateMachine.changeAnimation(
               finiteStateMachine.idleAnimation,
               finiteStateMachine.strafeLeftAnimation,
-              0.1
+              0.2
             )
             break
 
@@ -99,7 +99,7 @@ export class Player {
             finiteStateMachine.changeAnimation(
               finiteStateMachine.idleAnimation,
               finiteStateMachine.walkBackwardAnimation,
-              0.1
+              0.2
             )
             break
 
@@ -109,7 +109,7 @@ export class Player {
             finiteStateMachine.changeAnimation(
               finiteStateMachine.idleAnimation,
               finiteStateMachine.strafeRightAnimation,
-              0.1
+              0.2
             )
             break
 
@@ -129,7 +129,7 @@ export class Player {
           finiteStateMachine.changeAnimation(
             finiteStateMachine.walkForwardAnimation,
             finiteStateMachine.idleAnimation,
-            0.1
+            0.2
           )
           break
 
@@ -139,7 +139,7 @@ export class Player {
           finiteStateMachine.changeAnimation(
             finiteStateMachine.strafeLeftAnimation,
             finiteStateMachine.idleAnimation,
-            0.1
+            0.2
           )
           break
 
@@ -149,7 +149,7 @@ export class Player {
           finiteStateMachine.changeAnimation(
             finiteStateMachine.walkBackwardAnimation,
             finiteStateMachine.idleAnimation,
-            0.1
+            0.2
           )
           break
 
@@ -159,7 +159,7 @@ export class Player {
           finiteStateMachine.changeAnimation(
             finiteStateMachine.strafeRightAnimation,
             finiteStateMachine.idleAnimation,
-            0.1
+            0.2
           )
           break
 
