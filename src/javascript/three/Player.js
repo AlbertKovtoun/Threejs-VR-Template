@@ -28,6 +28,7 @@ export class Player {
 
     this.velocity = new THREE.Vector3()
     this.direction = new THREE.Vector3()
+    this.cameraWorldDirection = new THREE.Vector3()
 
     this.loadPlayer()
     this.setPlayer()
@@ -36,7 +37,7 @@ export class Player {
   }
 
   loadPlayer() {
-    loaders.gltfLoader.load("/assets/Character-Animated-3.gltf", (gltf) => {
+    loaders.gltfLoader.load("/assets/Character-Animated-4.gltf", (gltf) => {
       this.characterParent = gltf
       this.character = gltf.scene
 
@@ -69,9 +70,8 @@ export class Player {
 
     // Keydown
     document.addEventListener("keydown", (ev) => {
+      // Make sure the keydown event only gets triggered once for the FiniteStateMachine
       if (!ev.repeat) {
-        console.log(ev.key)
-
         switch (ev.code) {
           case "ArrowUp":
           case "KeyW":
@@ -165,6 +165,7 @@ export class Player {
 
         case "ShiftLeft":
           this.isRunning = false
+          finiteStateMachine.walkForwardAnimation.timeScale = 1
           break
       }
     })
@@ -228,6 +229,12 @@ export class Player {
     this.character.position.z = camera.camera.position.z
 
     this.character.rotation.copy(camera.camera.rotation)
+
+    // Weird but works
+    camera.camera.getWorldDirection(this.cameraWorldDirection)
+    this.cameraWorldDirection.y = 0
+    this.cameraWorldDirection.add(this.character.position)
+    this.character.lookAt(this.cameraWorldDirection)
 
     //Still need to fix this. This ain't right chief
     // this.character.rotation.y = camera.camera.rotation.y
