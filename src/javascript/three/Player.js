@@ -33,6 +33,7 @@ export class Player {
     this.loadPlayer()
     this.setPlayer()
     this.setPlayerHands()
+    // this.setDollyForVR()
     this.checkIntersections()
   }
 
@@ -56,18 +57,9 @@ export class Player {
       this.character.position.z = -2
       scene.add(this.character)
     })
-
-    //Swap out this Object3D() for a playerMesh
-    // this.player = new THREE.Object3D()
-    // this.player.position.z = 4
-    // this.player.add(camera.camera)
-    // scene.add(this.player)
   }
 
   setPlayer() {
-    // this.character.position.z = 2
-    // this.character.add(camera.camera)
-
     // Keydown
     document.addEventListener("keydown", (ev) => {
       // Make sure the keydown event only gets triggered once for the FiniteStateMachine
@@ -193,17 +185,8 @@ export class Player {
         this.velocity.x -= this.direction.x * playerSpeed
 
       if (collisionDetector.movementBlocked) {
-        // Option1
         camera.camera.position.x = Math.round(this.prevPositionX)
         camera.camera.position.z = Math.round(this.prevPositionZ)
-
-        // Option2
-        // camera.camera.position.x = this.prevPositionX
-        // camera.camera.position.z = this.prevPositionZ
-
-        //Option3
-        // camera.camera.position.x = Math.round((this.prevPositionX + Number.EPSILON) * 10) / 10
-        // camera.camera.position.z = Math.round((this.prevPositionZ + Number.EPSILON) * 10) / 10
       } else {
         camera.controls.moveRight(-this.velocity.x)
         camera.controls.moveForward(-this.velocity.z)
@@ -224,22 +207,16 @@ export class Player {
       }
     }
 
-    // this.character.position.copy(camera.camera.position)
     this.character.position.x = camera.camera.position.x
     this.character.position.z = camera.camera.position.z
 
     this.character.rotation.copy(camera.camera.rotation)
 
-    // Weird but works
     camera.camera.getWorldDirection(this.cameraWorldDirection)
     this.cameraWorldDirection.y = 0
     this.cameraWorldDirection.add(this.character.position)
     this.character.lookAt(this.cameraWorldDirection)
 
-    //Still need to fix this. This ain't right chief
-    // this.character.rotation.y = camera.camera.rotation.y
-
-    // camera.controls.target.set(0, 1.6, 0)
     camera.controls.target.set(
       0,
       Math.round((camera.camera.position.y + Number.EPSILON) * 10) / 10,
@@ -248,16 +225,6 @@ export class Player {
   }
 
   setPlayerHands() {
-    //Hand model
-    // loaders.gltfLoader.load(handsModelPath, (gltf) => {
-    //   this.hands = gltf.scene
-
-    //   this.leftHand = this.hands.getObjectByName("LeftHand")
-    //   this.rightHand = this.hands.getObjectByName("RightHand")
-
-    //   scene.add(this.hands)
-    // })
-
     //Left Controller
     this.controller1 = renderer.renderer.xr.getController(0)
     //Right Controller
@@ -292,20 +259,7 @@ export class Player {
     this.controller2.add(this.lazer.clone())
   }
 
-  updatePlayerHands() {
-    // this.leftHand.position.copy(
-    //   renderer.renderer.xr.getControllerGrip(0).position
-    // )
-    // this.rightHand.position.copy(
-    //   renderer.renderer.xr.getControllerGrip(1).position
-    // )
-    // this.leftHand.rotation.copy(
-    //   renderer.renderer.xr.getControllerGrip(0).rotation
-    // )
-    // this.rightHand.rotation.copy(
-    //   renderer.renderer.xr.getControllerGrip(1).rotation
-    // )
-  }
+  updatePlayerHands() {}
 
   checkIntersections() {
     //First Person View (from the center)
@@ -352,6 +306,21 @@ export class Player {
           raycaster.object.material.color = new THREE.Color(0x00ff00)
         }
       }
+    })
+  }
+
+  setDollyForVR() {
+    this.dolly = new THREE.Object3D()
+    this.dolly.position.z = 5
+    this.dolly.add(camera.camera)
+    scene.add(this.dolly)
+
+    this.dummyCam = new THREE.Object3D()
+    camera.camera.add(this.dummyCam)
+
+    this.controller1.addEventListener("connected", (ev) => {
+      this.controller1.gamepad = ev.data.gamepad
+      console.log(ev.data.gamepad)
     })
   }
 }

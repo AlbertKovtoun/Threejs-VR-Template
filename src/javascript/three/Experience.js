@@ -15,7 +15,7 @@ import { PostProcessing } from "./PostProcessing"
 import { Pane } from "tweakpane"
 import { CollisionDetector } from "./CollisionDetector"
 import { FiniteStateMachine } from "./FiniteStateMachine"
-import {MobileControls} from "./MobileControls"
+import { MobileControls } from "./MobileControls"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -87,8 +87,6 @@ renderer.renderer.setAnimationLoop(() => {
   raycaster.getLeftControllerIntersections(player.controller1)
   raycaster.getRightControllerIntersections(player.controller2)
   if (player.character) collisionDetector.updateRaycaster()
-
-  if (player.hands) player.updatePlayerHands()
 
   camera.controls.update()
   if (player.character) player.updatePlayer()
