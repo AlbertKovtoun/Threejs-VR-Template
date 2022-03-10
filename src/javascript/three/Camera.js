@@ -22,26 +22,22 @@ export class Camera {
   }
 
   setCameraControls() {
-    // this.controls = new OrbitControls(this.camera, canvas)
-    // this.controls.enableDamping = true
+    // const blocker = document.getElementById("blocker")
+    // const instructions = document.getElementById("instructions")
+    // this.controls = new PointerLockControls(this.camera, document.body)
+    // blocker.addEventListener("click", () => {
+    //   this.controls.lock()
+    // })
+    // this.controls.addEventListener("lock", function () {
+    //   instructions.style.display = "none"
+    //   blocker.style.display = "none"
+    // })
+    // this.controls.addEventListener("unlock", function () {
+    //   blocker.style.display = "block"
+    //   instructions.style.display = ""
+    // })
 
-    const blocker = document.getElementById("blocker")
-    const instructions = document.getElementById("instructions")
-
-    this.controls = new PointerLockControls(this.camera, document.body)
-
-    blocker.addEventListener("click", () => {
-      this.controls.lock()
-    })
-
-    this.controls.addEventListener("lock", function () {
-      instructions.style.display = "none"
-      blocker.style.display = "none"
-    })
-
-    this.controls.addEventListener("unlock", function () {
-      blocker.style.display = "block"
-      instructions.style.display = ""
-    })
+    this.controls = new OrbitControls(this.camera, canvas)
+    this.controls.enableDamping = true
   }
 }

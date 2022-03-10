@@ -238,6 +238,13 @@ export class Player {
 
     //Still need to fix this. This ain't right chief
     // this.character.rotation.y = camera.camera.rotation.y
+
+    // camera.controls.target.set(0, 1.6, 0)
+    camera.controls.target.set(
+      0,
+      Math.round((camera.camera.position.y + Number.EPSILON) * 10) / 10,
+      0
+    )
   }
 
   setPlayerHands() {

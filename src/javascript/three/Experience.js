@@ -90,7 +90,7 @@ renderer.renderer.setAnimationLoop(() => {
 
   if (player.hands) player.updatePlayerHands()
 
-  // camera.controls.update()
+  camera.controls.update()
   if (player.character) player.updatePlayer()
 
   //Render scene
