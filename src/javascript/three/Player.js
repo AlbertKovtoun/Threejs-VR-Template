@@ -89,7 +89,7 @@ export class Player {
             finiteStateMachine.changeAnimation(
               finiteStateMachine.idleAnimation,
               finiteStateMachine.strafeLeftAnimation,
-              0.2
+              0.1
             )
             break
 
@@ -109,7 +109,7 @@ export class Player {
             finiteStateMachine.changeAnimation(
               finiteStateMachine.idleAnimation,
               finiteStateMachine.strafeRightAnimation,
-              0.2
+              0.1
             )
             break
 
@@ -129,7 +129,7 @@ export class Player {
           finiteStateMachine.changeAnimation(
             finiteStateMachine.walkForwardAnimation,
             finiteStateMachine.idleAnimation,
-            0.2
+            0.1
           )
           break
 

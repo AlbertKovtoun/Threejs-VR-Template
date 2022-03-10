@@ -43,8 +43,5 @@ export class Camera {
       blocker.style.display = "block"
       instructions.style.display = ""
     })
-
-    //No idea why the example does it like this, but I'll roll with it
-    // scene.add(this.controls.getObject())
   }
 }

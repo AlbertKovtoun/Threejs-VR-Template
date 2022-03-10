@@ -15,6 +15,7 @@ import { PostProcessing } from "./PostProcessing"
 import { Pane } from "tweakpane"
 import { CollisionDetector } from "./CollisionDetector"
 import { FiniteStateMachine } from "./FiniteStateMachine"
+import {MobileControls} from "./MobileControls"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -54,6 +55,8 @@ export const raycaster = new Raycaster()
 export const mirror = new Mirror()
 
 export const player = new Player()
+
+export const mobileControls = new MobileControls()
 
 export const finiteStateMachine = new FiniteStateMachine()
 

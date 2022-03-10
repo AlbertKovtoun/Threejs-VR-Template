@@ -4,6 +4,8 @@ export class MobileControls {
   }
 
   setMobileControls() {
-
+    if(screen.availHeight > screen.availWidth) {
+      alert("Please use Landscape")
+    }
   }
 }
