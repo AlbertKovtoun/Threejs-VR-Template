@@ -56,9 +56,9 @@ export const mirror = new Mirror()
 
 export const player = new Player()
 
-export const mobileControls = new MobileControls()
-
 export const finiteStateMachine = new FiniteStateMachine()
+
+export const mobileControls = new MobileControls()
 
 export const collisionDetector = new CollisionDetector()
 
@@ -89,7 +89,10 @@ renderer.renderer.setAnimationLoop(() => {
   if (player.character) collisionDetector.updateRaycaster()
 
   camera.controls.update()
-  if (player.character) player.updatePlayer()
+  if (player.character) {
+    player.updatePlayer()
+    mobileControls.updatePlayer()
+  }
 
   //Render scene
   // renderer.renderer.render(scene, camera.camera)

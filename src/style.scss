@@ -38,6 +38,18 @@ $secondary-color: #ffff00;
   transform: translate(-50%, -50%);
 }
 
+.zone-joystick {
+  position: absolute;
+  width: 50vw;
+  height: 50vh;
+
+  background-color: white;
+  opacity: 0.5;
+
+  left: 0;
+  bottom: 0;
+}
+
 #blocker {
   position: absolute;
   width: 100%;

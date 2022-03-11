@@ -15,7 +15,7 @@ export class FiniteStateMachine {
     scene.add(skeleton)
 
     this.characterAnimations = characterParent.animations
-    console.log(this.characterAnimations)
+    // console.log(this.characterAnimations)
 
     this.mixer = new THREE.AnimationMixer(this.character)
 
