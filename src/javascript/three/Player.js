@@ -216,15 +216,10 @@ export class Player {
     this.cameraWorldDirection.y = 0
     this.cameraWorldDirection.add(this.character.position)
     this.character.lookAt(this.cameraWorldDirection)
-
-    camera.controls.target.set(
-      0,
-      Math.round((camera.camera.position.y + Number.EPSILON) * 10) / 10,
-      0
-    )
   }
 
   setPlayerHands() {
+
     //Left Controller
     this.controller1 = renderer.renderer.xr.getController(0)
     //Right Controller

@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { scene, environment, camera } from "./Experience"
+import { scene, environment, camera, player } from "./Experience"
 
 export class CollisionDetector {
   constructor() {

@@ -58,8 +58,6 @@ export const player = new Player()
 
 export const finiteStateMachine = new FiniteStateMachine()
 
-export const mobileControls = new MobileControls()
-
 export const collisionDetector = new CollisionDetector()
 
 export const postProcessing = new PostProcessing()
@@ -79,7 +77,6 @@ renderer.renderer.setAnimationLoop(() => {
 
   // shader.shader.material.uniforms.uTime.value = elapsedTime
 
-  // if (player.mixer) player.mixer.update(0.005)
   if (finiteStateMachine.mixer)
     finiteStateMachine.mixer.update(deltaTime * 0.001)
 
@@ -88,10 +85,11 @@ renderer.renderer.setAnimationLoop(() => {
   raycaster.getRightControllerIntersections(player.controller2)
   if (player.character) collisionDetector.updateRaycaster()
 
-  camera.controls.update()
+  // camera.controls.update()
+
   if (player.character) {
     player.updatePlayer()
-    mobileControls.updatePlayer()
+    // mobileControls.updatePlayer()
   }
 
   //Render scene

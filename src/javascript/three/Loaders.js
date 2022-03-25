@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { finiteStateMachine, player } from "./Experience"
+import { finiteStateMachine, mobileControls, player } from "./Experience"
 
 export class Loaders {
   constructor() {

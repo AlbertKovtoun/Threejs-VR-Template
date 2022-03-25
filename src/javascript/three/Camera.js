@@ -2,6 +2,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls"
 import { canvas, scene, sizes } from "./Experience"
+import { MobileControls } from "./MobileControls"
 
 export class Camera {
   constructor() {
@@ -22,22 +23,22 @@ export class Camera {
   }
 
   setCameraControls() {
-    // const blocker = document.getElementById("blocker")
-    // const instructions = document.getElementById("instructions")
-    // this.controls = new PointerLockControls(this.camera, document.body)
-    // blocker.addEventListener("click", () => {
-    //   this.controls.lock()
-    // })
-    // this.controls.addEventListener("lock", function () {
-    //   instructions.style.display = "none"
-    //   blocker.style.display = "none"
-    // })
-    // this.controls.addEventListener("unlock", function () {
-    //   blocker.style.display = "block"
-    //   instructions.style.display = ""
-    // })
+    const blocker = document.getElementById("blocker")
+    const instructions = document.getElementById("instructions")
+    this.controls = new PointerLockControls(this.camera, canvas)
 
-    this.controls = new OrbitControls(this.camera, canvas)
-    this.controls.enableDamping = true
+    blocker.addEventListener("click", () => {
+      this.controls.lock()
+    })
+    this.controls.addEventListener("lock", function () {
+      instructions.style.display = "none"
+      blocker.style.display = "none"
+    })
+    this.controls.addEventListener("unlock", function () {
+      blocker.style.display = "block"
+      instructions.style.display = ""
+    })
+
+    // this.c = new MobileControls(this.camera)
   }
 }
