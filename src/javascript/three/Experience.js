@@ -88,7 +88,7 @@ renderer.renderer.setAnimationLoop(() => {
   // camera.controls.update()
 
   if (player.character) {
-    player.updatePlayer()
+    player.updatePlayer(deltaTime * 0.0005)
     // mobileControls.updatePlayer()
   }
 

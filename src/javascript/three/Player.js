@@ -163,12 +163,12 @@ export class Player {
     })
   }
 
-  updatePlayer() {
-    let playerSpeed = 0.001
+  updatePlayer(speed) {
+    let playerSpeed = speed
 
     if (camera.controls.isLocked) {
-      this.velocity.x -= this.velocity.x * 0.1 //Momentum (lower = more momentum)
-      this.velocity.z -= this.velocity.z * 0.1
+      this.velocity.x -= this.velocity.x * 0.4 //Momentum (lower = more momentum)
+      this.velocity.z -= this.velocity.z * 0.4
 
       this.direction.z = Number(this.moveForward) - Number(this.moveBackward)
       this.direction.x = Number(this.moveRight) - Number(this.moveLeft)
