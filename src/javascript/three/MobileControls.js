@@ -102,5 +102,10 @@ export class MobileControls {
     this.moveLeft && camera.camera.translateX(-0.01)
     this.moveRight && camera.camera.translateX(0.01)
 
+    camera.camera.position.y = 1.7
+  }
+
+  updateFiniteStateMachine() {
+      
   }
 }
