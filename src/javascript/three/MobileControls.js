@@ -31,19 +31,20 @@ export class MobileControls {
 
     const joystickOptions = {
       zone: document.querySelector(".zone-joystick"),
-      color: "purple",
+      color: "red",
     }
 
     const joystickManager = nipplejs.create(joystickOptions)
 
     joystickManager.on("move", (evData, joystickData) => {
       // console.log(joystickData.vector)
+      let deadzone = 0.2
 
-      if (joystickData.vector.y > 0.5) {
-        this.moveForward = true
-      } else {
-        this.moveForward = false
-      }
+      joystickData.vector.y > deadzone ? this.moveForward = true : this.moveForward = false
+      joystickData.vector.y < -deadzone ? this.moveBackward = true : this.moveBackward = false
+      
+      joystickData.vector.x < -deadzone ? this.moveLeft = true : this.moveLeft = false
+      joystickData.vector.x > deadzone ? this.moveRight = true : this.moveRight = false
     })
 
     document.addEventListener("touchmove", (ev) => {
@@ -63,6 +64,13 @@ export class MobileControls {
         this.prevFingerX = this.normFingerX
         this.prevFingerY = this.normFingerY
       }
+    })
+
+    document.addEventListener("touchend", (ev) => {
+      this.moveForward = false
+      this.moveBackward = false
+      this.moveLeft = false
+      this.moveRight = false
     })
   }
   updateRotation() {
@@ -87,5 +95,12 @@ export class MobileControls {
     this.camera.quaternion.copy(this.rotation)
   }
 
-  updateCamera() {}
+  updateCamera() {
+    this.moveForward && camera.camera.translateZ(-0.01)
+    this.moveBackward && camera.camera.translateZ(0.01)
+
+    this.moveLeft && camera.camera.translateX(-0.01)
+    this.moveRight && camera.camera.translateX(0.01)
+
+  }
 }

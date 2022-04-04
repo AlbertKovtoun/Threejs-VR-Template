@@ -27,18 +27,18 @@ export class Camera {
     const instructions = document.getElementById("instructions")
     this.controls = new PointerLockControls(this.camera, canvas)
 
-    blocker.addEventListener("click", () => {
-      this.controls.lock()
-    })
-    this.controls.addEventListener("lock", function () {
-      instructions.style.display = "none"
-      blocker.style.display = "none"
-    })
-    this.controls.addEventListener("unlock", function () {
-      blocker.style.display = "block"
-      instructions.style.display = ""
-    })
+    // blocker.addEventListener("click", () => {
+    //   this.controls.lock()
+    // })
+    // this.controls.addEventListener("lock", function () {
+    //   instructions.style.display = "none"
+    //   blocker.style.display = "none"
+    // })
+    // this.controls.addEventListener("unlock", function () {
+    //   blocker.style.display = "block"
+    //   instructions.style.display = ""
+    // })
 
-    // this.c = new MobileControls(this.camera)
+    this.c = new MobileControls(this.camera)
   }
 }
