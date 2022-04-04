@@ -93,8 +93,8 @@ renderer.renderer.setAnimationLoop(() => {
   }
 
   //Render scene
-  // renderer.renderer.render(scene, camera.camera)
-  postProcessing.effectComposer.render()
+  renderer.renderer.render(scene, camera.camera)
+  // postProcessing.effectComposer.render()
 
   stats.end()
 })
