@@ -166,46 +166,42 @@ export class Player {
   updatePlayer(speed) {
     let playerSpeed = speed
 
-    if (camera.controls.isLocked) {
-      this.velocity.x -= this.velocity.x * 0.4 //Momentum (lower = more momentum)
-      this.velocity.z -= this.velocity.z * 0.4
+    // if (camera.controls.isLocked) {
+    this.velocity.x -= this.velocity.x * 0.4 //Momentum (lower = more momentum)
+    this.velocity.z -= this.velocity.z * 0.4
 
-      this.direction.z = Number(this.moveForward) - Number(this.moveBackward)
-      this.direction.x = Number(this.moveRight) - Number(this.moveLeft)
-      this.direction.normalize() // this ensures consistent movements in all directions
+    this.direction.z = Number(this.moveForward) - Number(this.moveBackward)
+    this.direction.x = Number(this.moveRight) - Number(this.moveLeft)
+    this.direction.normalize() // this ensures consistent movements in all directions
 
-      // Check if player is running
-      if (this.isRunning) {
-        playerSpeed *= 2
-      }
-
-      if (this.moveForward || this.moveBackward)
-        this.velocity.z -= this.direction.z * playerSpeed
-      if (this.moveLeft || this.moveRight)
-        this.velocity.x -= this.direction.x * playerSpeed
-
-      if (collisionDetector.movementBlocked) {
-        camera.camera.position.x = Math.round(this.prevPositionX)
-        camera.camera.position.z = Math.round(this.prevPositionZ)
-      } else {
-        camera.controls.moveRight(-this.velocity.x)
-        camera.controls.moveForward(-this.velocity.z)
-      }
-
-      if (this.frameCounter === 20) {
-        this.prevPositionX = camera.camera.position.x
-        this.prevPositionZ = camera.camera.position.z
-        this.frameCounter = 0
-      } else {
-        this.frameCounter++
-      }
-
-      if (collisionDetector.playerIsStuck) {
-        camera.camera.position.x = 0
-        camera.camera.position.z = 0
-        collisionDetector.playerIsStuck = false
-      }
+    // Check if player is running
+    if (this.isRunning) {
+      playerSpeed *= 2
     }
+
+    if (this.moveForward || this.moveBackward)
+      this.velocity.z -= this.direction.z * playerSpeed
+    if (this.moveLeft || this.moveRight)
+      this.velocity.x -= this.direction.x * playerSpeed
+
+    if (collisionDetector.movementBlocked) {
+      camera.camera.position.x = Math.round(this.prevPositionX)
+      camera.camera.position.z = Math.round(this.prevPositionZ)
+    } else {
+      camera.controls.moveRight(-this.velocity.x)
+      camera.controls.moveForward(-this.velocity.z)
+
+      camera.c.updateCamera()
+    }
+
+    if (this.frameCounter === 20) {
+      this.prevPositionX = camera.camera.position.x
+      this.prevPositionZ = camera.camera.position.z
+      this.frameCounter = 0
+    } else {
+      this.frameCounter++
+    }
+    // }
 
     this.character.position.x = camera.camera.position.x
     this.character.position.z = camera.camera.position.z
@@ -219,7 +215,6 @@ export class Player {
   }
 
   setPlayerHands() {
-
     //Left Controller
     this.controller1 = renderer.renderer.xr.getController(0)
     //Right Controller

@@ -12,7 +12,7 @@ export class CollisionDetector {
 
   setCollisionDetector() {
     this.detectionMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(20, 20, 2, 2),
+      new THREE.PlaneGeometry(10, 10, 2, 2),
       new THREE.MeshStandardMaterial({
         color: "black",
         roughness: 0.5,

@@ -91,7 +91,7 @@ renderer.renderer.setAnimationLoop(() => {
     player.updatePlayer(deltaTime * 0.0005)
   }
 
-  camera.c.updateCamera()
+  // camera.c.updateCamera()
 
   //Render scene
   renderer.renderer.render(scene, camera.camera)
