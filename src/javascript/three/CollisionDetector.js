@@ -7,6 +7,10 @@ export class CollisionDetector {
     this.currentIntersect = null
     this.movementBlocked = false
 
+    this.frameCounter = 0
+    this.prevPositionX = null
+    this.prevPositionZ = null
+
     this.setCollisionDetector()
   }
 
@@ -47,6 +51,28 @@ export class CollisionDetector {
       }
 
       this.currentIntersect = null
+    }
+  }
+
+  checkForCollision(velocity) {
+    if (this.movementBlocked) {
+      camera.camera.position.x = Math.round(this.prevPositionX)
+      camera.camera.position.z = Math.round(this.prevPositionZ)
+    } else {
+      //Desktop
+      camera.controls.moveRight(-velocity.x)
+      camera.controls.moveForward(-velocity.z)
+
+      //Mobile
+      camera.c.updateCamera()
+    }
+
+    if (this.frameCounter === 20) {
+      this.prevPositionX = camera.camera.position.x
+      this.prevPositionZ = camera.camera.position.z
+      this.frameCounter = 0
+    } else {
+      this.frameCounter++
     }
   }
 }

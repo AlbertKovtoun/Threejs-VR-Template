@@ -184,23 +184,22 @@ export class Player {
     if (this.moveLeft || this.moveRight)
       this.velocity.x -= this.direction.x * playerSpeed
 
-    if (collisionDetector.movementBlocked) {
-      camera.camera.position.x = Math.round(this.prevPositionX)
-      camera.camera.position.z = Math.round(this.prevPositionZ)
-    } else {
-      camera.controls.moveRight(-this.velocity.x)
-      camera.controls.moveForward(-this.velocity.z)
+    // if (collisionDetector.movementBlocked) {
+    //   camera.camera.position.x = Math.round(this.prevPositionX)
+    //   camera.camera.position.z = Math.round(this.prevPositionZ)
+    // } else {
+    //   this.desktopMovement()
+    // }
 
-      camera.c.updateCamera()
-    }
+    // if (this.frameCounter === 20) {
+    //   this.prevPositionX = camera.camera.position.x
+    //   this.prevPositionZ = camera.camera.position.z
+    //   this.frameCounter = 0
+    // } else {
+    //   this.frameCounter++
+    // }
+    collisionDetector.checkForCollision(this.velocity)
 
-    if (this.frameCounter === 20) {
-      this.prevPositionX = camera.camera.position.x
-      this.prevPositionZ = camera.camera.position.z
-      this.frameCounter = 0
-    } else {
-      this.frameCounter++
-    }
     // }
 
     this.character.position.x = camera.camera.position.x
