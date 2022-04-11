@@ -33,7 +33,7 @@ export class Player {
     this.loadPlayer()
     this.setPlayer()
     this.setPlayerHands()
-    // this.setDollyForVR()
+    this.setDollyForVR()
     this.checkIntersections()
   }
 
@@ -304,7 +304,7 @@ export class Player {
 
   setDollyForVR() {
     this.dolly = new THREE.Object3D()
-    this.dolly.position.z = 2
+    // this.dolly.position.z = 2
     this.dolly.add(camera.camera)
     scene.add(this.dolly)
 

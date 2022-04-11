@@ -66,6 +66,8 @@ export const collisionDetector = new CollisionDetector()
 
 export const postProcessing = new PostProcessing()
 
+deviceStateManager.executeForDevice()
+
 //Animate
 const clock = new THREE.Clock()
 let time = Date.now()
