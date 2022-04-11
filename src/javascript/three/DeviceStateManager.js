@@ -12,8 +12,14 @@ export class DeviceStateManager {
     //   alert("Please use Landscape (:")
     // }
 
-    if (typeof screen.orientation !== "undefined") {
-      console.log("User is on mobile")
+    //Meh
+    // if (typeof screen.orientation !== "undefined") {
+    //   console.log("User is on mobile")
+    //   this.state = "mobile"
+    // }
+
+    //Check for touch device
+    if ("ontouchstart" in document.documentElement) {
       this.state = "mobile"
     }
   }

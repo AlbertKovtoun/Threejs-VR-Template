@@ -64,7 +64,7 @@ export class CollisionDetector {
       camera.controls.moveForward(-velocity.z)
 
       //Mobile
-      camera.c.updateCamera()
+      camera.mobileControls.updateCamera()
     }
 
     if (this.frameCounter === 20) {

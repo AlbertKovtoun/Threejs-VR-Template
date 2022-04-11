@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { camera, player, scene } from "./Experience"
+import { camera, deviceStateManager, player, scene } from "./Experience"
 
 export class Raycaster {
   constructor() {
@@ -37,6 +37,11 @@ export class Raycaster {
     )
     this.object.name = "OBJECT"
     this.object.position.set(0, 0.5, -5)
+
+    if(deviceStateManager.state === "mobile") {
+      this.object.material.color = new THREE.Color(0xff0000)
+    }
+
     this.group.add(this.object)
   }
 

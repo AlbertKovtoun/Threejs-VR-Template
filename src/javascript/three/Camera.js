@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls"
-import { canvas, scene, sizes } from "./Experience"
+import { canvas, deviceStateManager, scene, sizes } from "./Experience"
 import { MobileControls } from "./MobileControls"
 
 export class Camera {
@@ -23,22 +23,36 @@ export class Camera {
   }
 
   setCameraControls() {
+    const instructionsText = document.getElementById("instructions-text")
     const blocker = document.getElementById("blocker")
     const instructions = document.getElementById("instructions")
+
     this.controls = new PointerLockControls(this.camera, canvas)
+    this.mobileControls = new MobileControls(this.camera)
 
-    blocker.addEventListener("click", () => {
-      this.controls.lock()
-    })
-    this.controls.addEventListener("lock", function () {
-      instructions.style.display = "none"
-      blocker.style.display = "none"
-    })
-    this.controls.addEventListener("unlock", function () {
-      blocker.style.display = "block"
-      instructions.style.display = ""
-    })
+    if (deviceStateManager.state === "desktop") {
+      instructionsText.innerHTML = "Click to enter (DESKTOP)"
 
-    this.c = new MobileControls(this.camera)
+      blocker.addEventListener("click", () => {
+        this.controls.lock()
+      })
+      this.controls.addEventListener("lock", function () {
+        instructions.style.display = "none"
+        blocker.style.display = "none"
+      })
+      this.controls.addEventListener("unlock", function () {
+        blocker.style.display = "block"
+        instructions.style.display = ""
+      })
+    }
+
+    if (deviceStateManager.state === "mobile") {
+      instructionsText.innerHTML = "Click to enter (MOBILE)"
+
+      //Maybe add a nice fadeout animation
+      blocker.addEventListener("click", () => {
+        blocker.style.display = "none"
+      })
+    }
   }
 }
