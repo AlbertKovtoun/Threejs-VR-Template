@@ -16,6 +16,7 @@ import { Pane } from "tweakpane"
 import { CollisionDetector } from "./CollisionDetector"
 import { FiniteStateMachine } from "./FiniteStateMachine"
 import { MobileControls } from "./MobileControls"
+import { DeviceStateManager } from "./DeviceStateManager"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -38,6 +39,8 @@ scene.add(al)
 // scene.add(pl)
 
 export const loaders = new Loaders()
+
+export const deviceStateManager = new DeviceStateManager()
 
 // export const shader = new Shader()
 

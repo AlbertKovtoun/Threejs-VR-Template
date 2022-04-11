@@ -25,10 +25,6 @@ export class MobileControls {
   }
 
   setMobileControls() {
-    if (screen.availHeight > screen.availWidth) {
-      alert("Please use Landscape (:")
-    }
-
     const joystickOptions = {
       zone: document.querySelector(".zone-joystick"),
       color: "red",
@@ -40,11 +36,19 @@ export class MobileControls {
       // console.log(joystickData.vector)
       let deadzone = 0.2
 
-      joystickData.vector.y > deadzone ? this.moveForward = true : this.moveForward = false
-      joystickData.vector.y < -deadzone ? this.moveBackward = true : this.moveBackward = false
-      
-      joystickData.vector.x < -deadzone ? this.moveLeft = true : this.moveLeft = false
-      joystickData.vector.x > deadzone ? this.moveRight = true : this.moveRight = false
+      joystickData.vector.y > deadzone
+        ? (this.moveForward = true)
+        : (this.moveForward = false)
+      joystickData.vector.y < -deadzone
+        ? (this.moveBackward = true)
+        : (this.moveBackward = false)
+
+      joystickData.vector.x < -deadzone
+        ? (this.moveLeft = true)
+        : (this.moveLeft = false)
+      joystickData.vector.x > deadzone
+        ? (this.moveRight = true)
+        : (this.moveRight = false)
     })
 
     document.addEventListener("touchmove", (ev) => {
@@ -105,7 +109,5 @@ export class MobileControls {
     camera.camera.position.y = 1.7
   }
 
-  updateFiniteStateMachine() {
-      
-  }
+  updateFiniteStateMachine() {}
 }

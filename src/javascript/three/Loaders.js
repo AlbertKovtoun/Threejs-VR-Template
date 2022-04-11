@@ -1,6 +1,11 @@
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { finiteStateMachine, mobileControls, player } from "./Experience"
+import {
+  deviceStateManager,
+  finiteStateMachine,
+  mobileControls,
+  player,
+} from "./Experience"
 
 export class Loaders {
   constructor() {
@@ -10,6 +15,7 @@ export class Loaders {
   setLoaders() {
     this.loadingManager = new THREE.LoadingManager(() => {
       //Put everything here what you want to load asynsc
+      deviceStateManager.checkForVR()
       player.setPlayer()
       finiteStateMachine.setFiniteStateMachine(player.characterParent)
     })
