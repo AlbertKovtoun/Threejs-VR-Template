@@ -23,9 +23,11 @@ export class Camera {
   }
 
   setCameraControls() {
-    const instructionsText = document.getElementById("instructions-text")
-    const blocker = document.getElementById("blocker")
-    const instructions = document.getElementById("instructions")
+    const zoneJoystick = document.querySelector(".zone-joystick")
+
+    const blocker = document.querySelector("#blocker")
+    const instructions = document.querySelector("#instructions")
+    const instructionsText = document.querySelector("#instructions-text")
 
     this.controls = new PointerLockControls(this.camera, canvas)
     this.mobileControls = new MobileControls(this.camera)
@@ -48,6 +50,8 @@ export class Camera {
 
     if (deviceStateManager.state === "mobile") {
       instructionsText.innerHTML = "Click to enter (MOBILE)"
+
+      zoneJoystick.style.display = "block"
 
       //Maybe add a nice fadeout animation
       blocker.addEventListener("click", () => {

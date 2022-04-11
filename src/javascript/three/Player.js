@@ -273,13 +273,13 @@ export class Player {
     this.controller1.addEventListener("selectstart", () => {
       if (raycaster.leftControllerOptions.currentIntersect) {
         //If statement to check which object is being clicked on
-        if (
-          raycaster.leftControllerOptions.currentIntersect.object.name ===
-          "OBJECT"
-        ) {
-          console.log("Left controller Clicked on OBJECT")
-          raycaster.object.material.color = new THREE.Color(0xff0000)
-        }
+        // if (
+        //   raycaster.leftControllerOptions.currentIntersect.object.name ===
+        //   "OBJECT"
+        // ) {
+        //   console.log("Left controller Clicked on OBJECT")
+        //   raycaster.object.material.color = new THREE.Color(0xff0000)
+        // }
       }
     })
 
@@ -292,7 +292,11 @@ export class Player {
           "OBJECT"
         ) {
           console.log("Right Clicked on OBJECT")
-          raycaster.object.material.color = new THREE.Color(0x00ff00)
+          raycaster.object.material.color = new THREE.Color(
+            Math.random(),
+            Math.random(),
+            Math.random()
+          )
         }
       }
     })
@@ -300,16 +304,11 @@ export class Player {
 
   setDollyForVR() {
     this.dolly = new THREE.Object3D()
-    this.dolly.position.z = 5
+    this.dolly.position.z = 2
     this.dolly.add(camera.camera)
     scene.add(this.dolly)
 
     this.dummyCam = new THREE.Object3D()
     camera.camera.add(this.dummyCam)
-
-    this.controller1.addEventListener("connected", (ev) => {
-      this.controller1.gamepad = ev.data.gamepad
-      console.log(ev.data.gamepad)
-    })
   }
 }

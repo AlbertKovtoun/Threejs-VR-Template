@@ -52,6 +52,7 @@ export const sizes = new Sizes()
 export const camera = new Camera()
 
 export const renderer = new Renderer()
+deviceStateManager.checkForVR()
 
 export const raycaster = new Raycaster()
 
@@ -87,8 +88,6 @@ renderer.renderer.setAnimationLoop(() => {
   raycaster.getLeftControllerIntersections(player.controller1)
   raycaster.getRightControllerIntersections(player.controller2)
   if (player.character) collisionDetector.updateRaycaster()
-
-  // camera.controls.update()
 
   if (player.character) {
     player.updatePlayer(deltaTime * 0.0005)
