@@ -248,8 +248,6 @@ export class Player {
     this.controller2.add(this.lazer.clone())
   }
 
-  updatePlayerHands() {}
-
   checkIntersections() {
     //First Person View (from the center)
     document.addEventListener("click", () => {
@@ -271,16 +269,22 @@ export class Player {
     //Left controller in VR
     //EventListener for when user is pressing main button
     this.controller1.addEventListener("selectstart", () => {
-      if (raycaster.leftControllerOptions.currentIntersect) {
-        //If statement to check which object is being clicked on
-        // if (
-        //   raycaster.leftControllerOptions.currentIntersect.object.name ===
-        //   "OBJECT"
-        // ) {
-        //   console.log("Left controller Clicked on OBJECT")
-        //   raycaster.object.material.color = new THREE.Color(0xff0000)
-        // }
-      }
+      // if (raycaster.leftControllerOptions.currentIntersect) {
+      //If statement to check which object is being clicked on
+      // if (
+      //   raycaster.leftControllerOptions.currentIntersect.object.name ===
+      //   "OBJECT"
+      // ) {
+      //   console.log("Left controller Clicked on OBJECT")
+      //   raycaster.object.material.color = new THREE.Color(0xff0000)
+      // }
+      // }
+
+      this.moveForward = true
+    })
+
+    this.controller1.addEventListener("selectend", () => {
+      this.moveForward = false
     })
 
     //Right controller in VR
@@ -310,5 +314,18 @@ export class Player {
 
     this.dummyCam = new THREE.Object3D()
     camera.camera.add(this.dummyCam)
+  }
+
+  updateDolly() {
+    this.dolly.add(this.controller1)
+    this.dolly.add(this.controller2)
+    this.dolly.add(this.controllerGrip1)
+    this.dolly.add(this.controllerGrip2)
+
+    if (this.moveForward) {
+      camera.camera.getWorldDirection(this.cameraWorldDirection)
+      this.dolly.position.addScaledVector(this.cameraWorldDirection, 0.01)
+      this.dolly.position.y = 0
+    }
   }
 }
