@@ -93,6 +93,9 @@ renderer.renderer.setAnimationLoop(() => {
 
   if (player.character) {
     player.updatePlayer(deltaTime * 0.0005)
+  }
+
+  if (player.dolly) {
     player.updateDolly()
   }
 

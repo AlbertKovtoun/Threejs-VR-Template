@@ -1,4 +1,4 @@
-import { deviceStateManager, camera, renderer } from "./Experience"
+import { deviceStateManager, camera, renderer, player } from "./Experience"
 
 export class DeviceStateManager {
   constructor() {
@@ -22,6 +22,9 @@ export class DeviceStateManager {
     renderer.vrButton.addEventListener("click", () => {
       console.log("User is in VR")
       this.state = "vr"
+
+      player.setDollyForVR()
+      console.log("Does this code get reached?")
     })
   }
 
@@ -59,6 +62,11 @@ export class DeviceStateManager {
       blocker.addEventListener("click", () => {
         blocker.style.display = "none"
       })
+    }
+    console.log(this.state)
+
+    //VR
+    if (deviceStateManager.state === "vr") {
     }
   }
 }
