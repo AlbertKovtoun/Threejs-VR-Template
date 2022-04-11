@@ -54,7 +54,7 @@ export class Player {
         // child.frustumCulled = false
       })
 
-      this.character.position.z = -2
+      // this.character.position.z = -2
       scene.add(this.character)
     })
   }

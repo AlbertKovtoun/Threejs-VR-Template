@@ -63,10 +63,5 @@ export class DeviceStateManager {
         blocker.style.display = "none"
       })
     }
-    console.log(this.state)
-
-    //VR
-    if (deviceStateManager.state === "vr") {
-    }
   }
 }
