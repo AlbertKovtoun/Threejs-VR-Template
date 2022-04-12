@@ -58,6 +58,11 @@ export class CollisionDetector {
     if (this.movementBlocked) {
       camera.camera.position.x = Math.round(this.prevPositionX)
       camera.camera.position.z = Math.round(this.prevPositionZ)
+
+      if (player.dolly) {
+        player.dolly.position.x = Math.round(this.prevPositionX)
+        player.dolly.position.z = Math.round(this.prevPositionZ)
+      }
     } else {
       //Desktop
       camera.controls.moveRight(-velocity.x)
@@ -65,6 +70,11 @@ export class CollisionDetector {
 
       //Mobile
       camera.mobileControls.updateCamera()
+
+      //VR
+      if (player.dolly) {
+        player.updateDolly()
+      }
     }
 
     if (this.frameCounter === 20) {
