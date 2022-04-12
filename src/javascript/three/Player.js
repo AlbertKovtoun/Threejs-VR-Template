@@ -279,12 +279,21 @@ export class Player {
       //   raycaster.object.material.color = new THREE.Color(0xff0000)
       // }
       // }
-
       this.moveForward = true
+      finiteStateMachine.changeAnimation(
+        finiteStateMachine.idleAnimation,
+        finiteStateMachine.walkForwardAnimation,
+        0.1
+      )
     })
 
     this.controller1.addEventListener("selectend", () => {
       this.moveForward = false
+      finiteStateMachine.changeAnimation(
+        finiteStateMachine.walkForwardAnimation,
+        finiteStateMachine.idleAnimation,
+        0.1
+      )
     })
 
     //Right controller in VR
@@ -324,7 +333,7 @@ export class Player {
 
     if (this.moveForward) {
       camera.camera.getWorldDirection(this.cameraWorldDirection)
-      this.dolly.position.addScaledVector(this.cameraWorldDirection, 0.01)
+      this.dolly.position.addScaledVector(this.cameraWorldDirection, 0.004)
       this.dolly.position.y = 0
     }
   }
