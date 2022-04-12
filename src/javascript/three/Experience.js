@@ -17,7 +17,7 @@ import { CollisionDetector } from "./CollisionDetector"
 import { FiniteStateMachine } from "./FiniteStateMachine"
 import { MobileControls } from "./MobileControls"
 import { DeviceStateManager } from "./DeviceStateManager"
-import {Lights} from "./Lights"
+import { Lights } from "./Lights"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -94,6 +94,8 @@ renderer.renderer.setAnimationLoop(() => {
   if (player.dolly) {
     player.updateDolly()
   }
+
+  camera.mobileControls.updateFiniteStateMachine()
 
   //Render scene
   renderer.renderer.render(scene, camera.camera)

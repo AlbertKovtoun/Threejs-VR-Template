@@ -52,8 +52,13 @@ export class MobileControls {
     })
 
     document.addEventListener("touchmove", (ev) => {
-      this.fingerX = ev.touches[0].clientX
-      this.fingerY = ev.touches[0].clientY
+      if (ev.touches.length === 1) {
+        this.fingerX = ev.touches[0].clientX
+        this.fingerY = ev.touches[0].clientY
+      } else {
+        this.fingerX = ev.touches[1].clientX
+        this.fingerY = ev.touches[1].clientY
+      }
 
       this.normFingerX = this.fingerX - sizes.width / 2
       this.normFingerY = this.fingerY - sizes.height / 2
@@ -109,5 +114,7 @@ export class MobileControls {
     camera.camera.position.y = 1.7
   }
 
-  updateFiniteStateMachine() {}
+  updateFiniteStateMachine() {
+    // console.log(this.moveForward)
+  }
 }
