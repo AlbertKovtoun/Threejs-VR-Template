@@ -17,6 +17,7 @@ import { CollisionDetector } from "./CollisionDetector"
 import { FiniteStateMachine } from "./FiniteStateMachine"
 import { MobileControls } from "./MobileControls"
 import { DeviceStateManager } from "./DeviceStateManager"
+import {Lights} from "./Lights"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -31,12 +32,7 @@ export const canvas = document.querySelector("canvas.webgl")
 
 export const scene = new THREE.Scene()
 
-const al = new THREE.AmbientLight(0xffffff, 1)
-scene.add(al)
-
-// const pl = new THREE.PointLight(0xffffff, 2)
-// pl.position.set(0, 1, 0)
-// scene.add(pl)
+export const lights = new Lights()
 
 export const loaders = new Loaders()
 

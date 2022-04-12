@@ -1,5 +1,11 @@
 import * as THREE from "three"
-import { camera, deviceStateManager, player, scene } from "./Experience"
+import {
+  camera,
+  deviceStateManager,
+  environment,
+  player,
+  scene,
+} from "./Experience"
 
 export class Raycaster {
   constructor() {
@@ -33,12 +39,17 @@ export class Raycaster {
 
     this.object = new THREE.Mesh(
       new THREE.SphereGeometry(1, 20, 20),
-      new THREE.MeshBasicMaterial({ color: "" })
+      new THREE.MeshStandardMaterial({
+        color: "white",
+        roughness: 0,
+        envMap: environment.envMap,
+        metalness: 1,
+      })
     )
     this.object.name = "OBJECT"
-    this.object.position.set(0, 0.5, -5)
+    this.object.position.set(0, 1, -5)
 
-    if(deviceStateManager.state === "mobile") {
+    if (deviceStateManager.state === "mobile") {
       this.object.material.color = new THREE.Color(0xff0000)
     }
 

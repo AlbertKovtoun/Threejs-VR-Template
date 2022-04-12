@@ -17,8 +17,12 @@ export class Renderer {
     this.renderer.setSize(sizes.width, sizes.height)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     this.renderer.setClearColor(0xffffff)
+    this.renderer.outputEncoding = THREE.sRGBEncoding
+    // this.renderer.toneMapping = THREE.ACESFilmicToneMapping
 
-    this.vrButton = document.body.appendChild(VRButton.createButton(this.renderer))
+    this.vrButton = document.body.appendChild(
+      VRButton.createButton(this.renderer)
+    )
     this.renderer.xr.enabled = true
   }
 }

@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { scene, environment, camera, player } from "./Experience"
+import { scene, environment, camera, player, loaders } from "./Experience"
 
 export class CollisionDetector {
   constructor() {
@@ -17,11 +17,10 @@ export class CollisionDetector {
   setCollisionDetector() {
     this.detectionMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(10, 10, 2, 2),
-      new THREE.MeshStandardMaterial({
-        color: "black",
-        roughness: 0.5,
+      new THREE.MeshPhysicalMaterial({
+        color: 0xff0000,
         envMap: environment.envMap,
-        envMapIntensity: 2.5,
+        roughness: 0,
       })
     )
     // this.detectionMesh.position.y = -1
