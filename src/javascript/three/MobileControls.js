@@ -86,7 +86,7 @@ export class MobileControls {
     const xh = this.fingerXDelta / sizes.width
     const yh = this.fingerYDelta / sizes.height
 
-    this.phi += -xh * 5
+    this.phi += -xh * 14
     this.theta = clamp(this.theta + -yh * 5, -Math.PI / 3, Math.PI / 3)
 
     const qx = new THREE.Quaternion()
