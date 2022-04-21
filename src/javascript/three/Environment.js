@@ -8,12 +8,12 @@ export class Environment {
 
   setEnvironment() {
     this.envMap = loaders.cubeTextureLoader.load([
-      "/assets/3/px.png",
-      "/assets/3/nx.png",
-      "/assets/3/py.png",
-      "/assets/3/ny.png",
-      "/assets/3/pz.png",
-      "/assets/3/nz.png",
+      "/assets/4/px.png",
+      "/assets/4/nx.png",
+      "/assets/4/py.png",
+      "/assets/4/ny.png",
+      "/assets/4/pz.png",
+      "/assets/4/nz.png",
     ])
     this.envMap.encoding = THREE.sRGBEncoding
   }

@@ -18,7 +18,7 @@ export class CollisionDetector {
     this.detectionMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(10, 10, 2, 2),
       new THREE.MeshPhysicalMaterial({
-        color: 0xff0000,
+        color: "gray",
         envMap: environment.envMap,
         roughness: 0,
       })

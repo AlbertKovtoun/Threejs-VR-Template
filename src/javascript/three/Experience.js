@@ -18,6 +18,7 @@ import { FiniteStateMachine } from "./FiniteStateMachine"
 import { MobileControls } from "./MobileControls"
 import { DeviceStateManager } from "./DeviceStateManager"
 import { Lights } from "./Lights"
+import { FireFlies } from "./FireFlies"
 
 export const pane = new Pane()
 export const postProcessingFolder = pane.addFolder({
@@ -55,6 +56,8 @@ export const raycaster = new Raycaster()
 export const mirror = new Mirror()
 
 export const player = new Player()
+
+export const fireFlies = new FireFlies()
 
 export const finiteStateMachine = new FiniteStateMachine()
 
@@ -94,6 +97,8 @@ renderer.renderer.setAnimationLoop(() => {
   if (player.dolly) {
     player.updateDolly()
   }
+
+  fireFlies.updateFireFliesPosition(elapsedTime)
 
   camera.mobileControls.updateFiniteStateMachine()
 
